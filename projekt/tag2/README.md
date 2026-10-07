@@ -15,6 +15,25 @@ Bearbeitet die Tickets in dieser Reihenfolge. T2-02 ist die Voraussetzung für T
 
 **T2-04 ist ein Bonus-Ticket** für Teams, die schneller vorankommen. Ihr könnt es überspringen und direkt mit T2-05 weitermachen.
 
+## Vor dem Start: Stand von Tag 1 prüfen
+
+Tag 2 baut auf den Gruppen und Konten von Tag 1 auf. Lasst zuerst das Check-Skript von Tag 1 laufen:
+
+```bash
+sudo bash check-tag1.sh
+```
+
+Sind in den Abschnitten **T1-03 bis T1-05** Punkte rot – zum Beispiel, weil ihr gestern nicht fertig geworden seid –, holt den fehlenden Stand mit dem Aufhol-Skript nach:
+
+```bash
+wget https://raw.githubusercontent.com/qasch/le-202610/main/projekt/aufholen/aufholen-tag2.sh
+sudo bash aufholen-tag2.sh
+```
+
+Das Skript ergänzt nur, was fehlt, und zeigt jede Änderung mit dem Kommando und einer Begründung an. Sucht euch **drei** dieser Zeilen aus und erklärt sie im Logbuch: Was tut das Kommando, und in welchem Ticket hättet ihr es gebraucht?
+
+Hostname und persönliche Admin-Konten (T1-01) richtet das Skript nicht ein – die braucht ihr ohnehin, um überhaupt arbeiten zu können.
+
 ## Neu heute: Als eine andere Person testen
 
 Ob Berechtigungen stimmen, seht ihr nur, wenn ihr es **als die betroffene Person** ausprobiert. Dafür öffnet ihr auf dem Server eine Shell als diese Person:
