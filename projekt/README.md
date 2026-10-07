@@ -14,7 +14,7 @@ Lest die Tickets im Browser auf GitHub: <https://github.com/qasch/le-202610/tree
 |---|---|---|
 | 1 | Server in Betrieb nehmen, Benutzer und Gruppen anlegen | [Tag 1](./tag1/) |
 | 2 | Abteilungsordner und Berechtigungen | [Tag 2](./tag2/) |
-| 3 | Systemanalyse, Logauswertung, Sicherheitsaudit, erstes Skript | folgt |
+| 3 | Systemanalyse, Logauswertung, Sicherheitsaudit, Datensicherung, erstes Skript, Software-Empfehlung | [Tag 3](./tag3/) |
 | 4 | Störfälle beheben, Präsentation, Rückblick | folgt |
 
 ## Spielregeln
