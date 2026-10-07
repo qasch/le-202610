@@ -214,7 +214,7 @@ else
 fi
 
 # --- T2-04 ------------------------------------------------------------------
-ueberschrift "T2-04 Lesezugriff für die Geschäftsführung"
+ueberschrift "T2-04 Lesezugriff für die Geschäftsführung (Bonus)"
 
 zu_viel=()
 zu_wenig=()

@@ -1,4 +1,6 @@
-# T2-04 – Lesezugriff für die Geschäftsführung
+# T2-04 – Lesezugriff für die Geschäftsführung (Bonus)
+
+> **Bonus-Ticket:** Dieses Ticket ist freiwillig. Wenn die Zeit knapp ist, überspringt es und macht mit T2-05 weiter.
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Zugriff verweigert?!
@@ -17,7 +19,7 @@
 
 Alle Schritte führt ihr **auf dem Server** aus. Jeden Ansatz macht ihr am Ende wieder rückgängig.
 
-## ⭐ Pflicht: Ansatz 1 – Grete in die Abteilungsgruppe
+## ⭐ Ansatz 1 – Grete in die Abteilungsgruppe
 
 ### Schritt 1: Ausgangslage
 

@@ -96,7 +96,7 @@ Führt das Check-Skript aus. Im Abschnitt **T2-02** sollten alle Punkte grün se
 - Die vier Abteilungsordner gehören dem Besitzer `root` und der jeweiligen Abteilungsgruppe.
 - Die Abteilungsordner haben die Rechte `2770` (`drwxrws---`).
 
-> Grete Frost kommt jetzt nicht in die Abteilungsordner. Das klären wir in **T2-04**.
+> Grete Frost kommt jetzt nicht in die Abteilungsordner. Darum geht es im Bonus-Ticket **T2-04**.
 
 ## ⭐⭐ Erweiterung: Die `umask`
 

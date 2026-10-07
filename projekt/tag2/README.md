@@ -7,11 +7,13 @@ Gestern habt ihr die Firma angelegt. Heute sorgt ihr dafür, dass jede Person ge
 | [T2-01](./T2-01-heimatverzeichnisse.md) | Heimatverzeichnisse absichern | ⭐ ⭐⭐ ⭐⭐⭐ |
 | [T2-02](./T2-02-abteilungsordner.md) | Abteilungsordner | ⭐ ⭐⭐ ⭐⭐⭐ |
 | [T2-03](./T2-03-austauschordner.md) | Austauschordner für alle | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T2-04](./T2-04-lesezugriff-geschaeftsfuehrung.md) | Lesezugriff für die Geschäftsführung | ⭐ ⭐⭐ ⭐⭐⭐ |
+| [T2-04](./T2-04-lesezugriff-geschaeftsfuehrung.md) | **Bonus:** Lesezugriff für die Geschäftsführung | ⭐ ⭐⭐ ⭐⭐⭐ |
 | [T2-05](./T2-05-verknuepfungen.md) | Verknüpfungen: Symlinks und Hardlinks | ⭐ ⭐⭐ ⭐⭐⭐ |
 | [T2-06](./T2-06-offboarding.md) | Offboarding | ⭐ ⭐⭐ ⭐⭐⭐ |
 
 Bearbeitet die Tickets in dieser Reihenfolge. T2-02 ist die Voraussetzung für T2-03 bis T2-06.
+
+**T2-04 ist ein Bonus-Ticket** für Teams, die schneller vorankommen. Ihr könnt es überspringen und direkt mit T2-05 weitermachen.
 
 ## Neu heute: Als eine andere Person testen
 
