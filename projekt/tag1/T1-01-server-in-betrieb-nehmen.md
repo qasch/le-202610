@@ -5,7 +5,7 @@
 >
 > Hallo IT,
 >
-> der neue Server steht bereit. Bitte richtet ihn so ein, dass ihr alle drei von euren Arbeitsplätzen aus darauf arbeiten könnt. Und bitte nicht alle mit dem Root-Passwort – ich habe gehört, das macht man nicht mehr so.
+> der neue Server steht bereit, und per SSH kommt ihr auch schon drauf – allerdings nur über das eine Konto, das bei der Installation angelegt wurde. Bitte richtet ihn so ein, dass **jede Person** von ihrem Arbeitsplatz aus mit einem **eigenen** Konto darauf arbeiten kann. Und bitte nicht alle mit dem Root-Passwort – ich habe gehört, das macht man nicht mehr so.
 >
 > Danke! Grete
 
@@ -17,7 +17,7 @@
 2. Tragt im Logbuch ein, wessen VM der Server ist. Die anderen beiden VMs sind ab jetzt eure **Arbeitsplätze**.
 3. Legt in eurer Virtualisierungssoftware einen **Snapshot** der Server-VM an und nennt ihn `vor-projekt`.
 
-> Alle folgenden Schritte bis einschließlich Schritt 6 führt ihr **auf dem Server** als `root` aus. Wechselt dazu mit `su -` in eine Root-Shell.
+> Alle folgenden Schritte bis einschließlich Schritt 6 führt ihr **auf dem Server** als `root` aus. Die VM-Besitzerin bzw. der VM-Besitzer meldet sich dazu von einem Arbeitsplatz aus per SSH mit dem vorhandenen Konto am Server an und wechselt mit `su -` in eine Root-Shell. Die anderen schauen zu und navigieren.
 
 ### Schritt 2: Hostnamen setzen
 
@@ -26,18 +26,21 @@
 3. Öffnet die Datei `/etc/hosts` in einem Editor. Ersetzt in der Zeile, die mit `127.0.1.1` beginnt, den alten Namen durch den neuen.
 4. Prüft mit `hostname`, ob der neue Name gesetzt ist.
 
-### Schritt 3: IP-Adresse ermitteln
+### Schritt 3: IP-Adresse für die Tafel
+
+Die IP-Adresse kennt ihr schon – sonst hättet ihr euch nicht verbinden können. Jetzt seht ihr nach, wo der Server sie selbst anzeigt.
 
 1. Lasst euch die Netzwerkschnittstellen des Servers anzeigen.
 2. Sucht die Schnittstelle, die **nicht** `lo` heißt, und dort die Zeile, die mit `inet` beginnt.
-3. Notiert im Logbuch den Namen der Schnittstelle und die IPv4-Adresse (z. B. `enp1s0`, `192.168.100.23/24`).
+3. Notiert im Logbuch den Namen der Schnittstelle und die IPv4-Adresse (z. B. `enp1s0`, `192.168.100.23/24`). Ist es dieselbe Adresse, mit der ihr euch verbunden habt?
 4. Tragt Hostname und IP-Adresse in die Tabelle an der Tafel ein.
 
 ### Schritt 4: SSH-Server prüfen
 
-1. Prüft mit `systemctl status ssh`, ob der SSH-Dienst läuft. Achtet auf die Zeile `Active:`.
-2. Falls der Dienst nicht gefunden wird: Installiert das Paket `openssh-server` und prüft erneut.
-3. Notiert im Logbuch, ob der Dienst schon lief oder ob ihr ihn installieren musstet.
+Dass SSH funktioniert, wisst ihr schon. Aber woran erkennt man das auf dem Server?
+
+1. Prüft mit `systemctl status ssh`, ob der SSH-Dienst läuft. Achtet auf die Zeilen `Loaded:` und `Active:`.
+2. Notiert im Logbuch: Seit wann läuft der Dienst? Steht in der Zeile `Loaded:` hinter dem Pfad `enabled` – und was bedeutet das für einen Neustart des Servers?
 
 ### Schritt 5: `sudo` installieren
 
@@ -61,7 +64,7 @@ Die Person, der die VM gehört, hat bereits ein Konto. Die beiden anderen bekomm
 Jede Person führt diese Schritte **an ihrem eigenen Arbeitsplatz** aus (die VM-Besitzerin bzw. der VM-Besitzer meldet sich am Server einmal neu an):
 
 1. Verbindet euch mit `ssh <benutzername>@<ip-des-servers>`.
-2. Bei der ersten Verbindung fragt SSH, ob ihr dem Server vertraut. Antwortet mit `yes`.
+2. Habt ihr euch von diesem Arbeitsplatz aus noch nie mit dem Server verbunden, fragt SSH, ob ihr ihm vertraut (*fingerprint*). Antwortet mit `yes`. Wart ihr schon verbunden, kommt die Frage nicht – auch nicht nach dem neuen Hostnamen: SSH erkennt den Server an seinem Schlüssel, nicht an seinem Namen.
 3. Führt nacheinander aus und notiert die Ausgaben:
    - `hostname` – erwartet: `pinguin-team<N>`
    - `whoami` – erwartet: euer Benutzername
@@ -127,6 +130,7 @@ Jede Person führt diese Schritte **an ihrem eigenen Arbeitsplatz** aus (die VM-
 <summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
 
 - Hostname: `man hostnamectl`, außerdem die Dateien `/etc/hostname` und `/etc/hosts`
+- Dienste: `man systemctl` – `enabled` bedeutet „wird beim Start automatisch gestartet“
 - IP-Adresse: Kapitel Netzwerkkonfiguration in der Dokumentation
 - Pakete installiert ihr als `root` mit `apt`.
 - Gruppen eines Kontos ändern: `man usermod` – lest die Beschreibung der Optionen `-a` und `-G`.
@@ -138,11 +142,11 @@ Jede Person führt diese Schritte **an ihrem eigenen Arbeitsplatz** aus (die VM-
 
 ```text
 su -
-hostnamectl set-hostname ...
+hostnamectl hostname ...
 nano /etc/hosts
 ip a
 systemctl status ssh
-apt install openssh-server sudo
+apt install sudo
 adduser ...
 usermod -aG ...
 ssh ...
@@ -161,17 +165,17 @@ Auf dem Server als `root`:
 su -
 
 # Schritt 2: Hostname setzen
-hostnamectl set-hostname pinguin-team3
+hostnamectl hostname pinguin-team3
 nano /etc/hosts          # Zeile ändern zu:  127.0.1.1   pinguin-team3
 hostname
 
 # Schritt 3: IP-Adresse ermitteln (Eintrag "inet" der Schnittstelle, nicht lo)
 ip a
 
-# Schritt 4 und 5: SSH-Server und sudo
-systemctl status ssh
+# Schritt 4 und 5: SSH-Server prüfen, sudo installieren
+systemctl status ssh     # Loaded: … enabled …   Active: active (running) since …
 apt update
-apt install openssh-server sudo
+apt install sudo
 
 # Schritt 6: Admin-Konten anlegen und zur Gruppe sudo hinzufügen – das -a ist wichtig!
 adduser anna
@@ -189,6 +193,10 @@ hostname
 whoami
 sudo whoami      # Ausgabe: root
 ```
+
+**`hostnamectl hostname` oder `hostnamectl set-hostname`?** Bis systemd 248 hieß der Befehl `set-hostname`. Seit systemd 249 gibt es nur noch `hostname`: ohne Argument zeigt er den Namen an, mit Argument setzt er ihn. Der alte Name funktioniert weiter, steht aber nicht mehr in der Manpage. Viele Anleitungen im Netz verwenden noch `set-hostname` – die Manpage beschreibt immer die Version, die auf **eurem** System installiert ist.
+
+**Schritt 4:** `enabled` in der Zeile `Loaded:` bedeutet, dass der Dienst beim Systemstart automatisch gestartet wird. Hinter `Active: active (running) since` steht, seit wann er läuft – meist seit dem letzten Start der VM.
 
 **Warum `sudo` statt Root-Passwort?** Jede Person meldet sich mit ihrem eigenen Passwort an, jede Aktion ist einer Person zuzuordnen, und wenn jemand das Team verlässt, wird nur dessen Konto deaktiviert – das Root-Passwort muss nicht geändert werden.
 
