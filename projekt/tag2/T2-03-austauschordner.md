@@ -68,11 +68,19 @@ Führt das Check-Skript aus. Im Abschnitt **T2-03** sollten alle Punkte grün se
 
 1. Jonas legt die Datei `/srv/firma/austausch/termine.txt` an. Prüft mit `ls -l`: Darf die Gruppe `mitarbeitende` in die Datei schreiben?
 2. Lena versucht, die Datei zu **löschen**. Klappt das?
-3. Lena überschreibt den **Inhalt** der Datei: `echo "Alle Termine abgesagt!" > /srv/firma/austausch/termine.txt`. Klappt das? Prüft mit `cat`.
-4. Erklärt im Logbuch, was das Sticky Bit schützt und was nicht.
-5. Wer außer der Besitzerin oder dem Besitzer einer Datei darf trotz Sticky Bit löschen? Sucht in `man chmod` im Abschnitt zum *restricted deletion flag* nach der Antwort.
-6. `/tmp` zeigt ein kleines `t`, euer Austauschordner ein großes `T`. Was bedeutet der Unterschied? (Vergleicht mit dem großen `S` aus T2-02.)
-7. Räumt die Datei `termine.txt` auf (als Jonas).
+3. Lena versucht, den **Inhalt** der Datei zu überschreiben: `echo "Alle Termine abgesagt!" > /srv/firma/austausch/termine.txt`. Klappt das? Notiert die Meldung.
+4. Vergleicht mit T2-02 Schritt 6: Dort durfte Murat an Lenas Datei eine Zeile anhängen. Was ist hier anders – an der Datei und am Ordner?
+5. Die Ursache ist eine **Schutzfunktion des Linux-Kernels**, die nicht zu den klassischen Rechten gehört und in `ls -l` nicht zu sehen ist. Lasst euch ihren Wert anzeigen:
+
+   ```bash
+   cat /proc/sys/fs/protected_regular
+   ```
+
+   Lest in `man 5 proc_sys_fs` (Suchbegriff `protected_regular`) nach, was die Werte `0`, `1` und `2` bedeuten.
+6. Erklärt im Logbuch: Was schützt das Sticky Bit, was schützt der Kernel zusätzlich – und gegen welchen Angriff in `/tmp` ist dieser Schutz gedacht?
+7. Wer außer der Besitzerin oder dem Besitzer einer Datei darf trotz Sticky Bit löschen? Sucht in `man chmod` im Abschnitt zum *restricted deletion flag* nach der Antwort.
+8. `/tmp` zeigt ein kleines `t`, euer Austauschordner ein großes `T`. Was bedeutet der Unterschied? (Vergleicht mit dem großen `S` aus T2-02.)
+9. Räumt die Datei `termine.txt` auf (als Jonas).
 
 ## ⭐⭐⭐ Profi: Das dritte Spezialbit – SUID
 
@@ -107,6 +115,7 @@ Es gibt drei Spezialbits: SUID (`4`), SGID (`2`) und Sticky (`1`). Zwei davon ha
 - Spezialbits: `man chmod`, Abschnitt `SETUID AND SETGID BITS` und `RESTRICTED DELETION FLAG OR STICKY BIT`
 - Löschen ist eine Änderung des **Verzeichnisses**, nicht der Datei.
 - Dateien nach Rechten suchen: `man find`, Suchbegriff `-perm`
+- Zusätzlicher Schutz des Kernels: `man 5 proc_sys_fs`, Suchbegriff `protected_regular` (auf älteren Systemen in `man 5 proc`)
 
 </details>
 
@@ -119,6 +128,7 @@ sudo chgrp mitarbeitende /srv/firma/austausch
 sudo chmod 2770 /srv/firma/austausch
 sudo chmod +t /srv/firma/austausch     oder   sudo chmod 3770 /srv/firma/austausch
 ls -ld /srv/firma/austausch /tmp
+cat /proc/sys/fs/protected_regular
 sudo -iu <benutzer>
 ls -l /usr/bin/passwd /etc/shadow
 find / -type f -perm -4000 2>/dev/null
@@ -155,7 +165,15 @@ rm /srv/firma/austausch/speiseplan.txt          # Operation not permitted
 
 **Schritt 5:** `/tmp` hat `drwxrwxrwt` (`1777`): Alle Personen und alle Programme dürfen dort Dateien anlegen. Ohne Sticky Bit könnte jede Person die temporären Dateien aller anderen löschen oder austauschen.
 
-**⭐⭐:** Lena kann `termine.txt` nicht löschen, aber den Inhalt überschreiben, weil die Datei für die Gruppe beschreibbar ist. Das Sticky Bit schützt nur den **Verzeichniseintrag** (Löschen, Umbenennen), nicht den Inhalt. Löschen dürfen außerdem die Besitzerin oder der Besitzer des **Verzeichnisses** (hier `root`) und `root`. Kleines `t`: Sticky Bit und `x` für `others` gesetzt. Großes `T`: Sticky Bit gesetzt, aber kein `x` für `others`.
+**⭐⭐:** Lena kann `termine.txt` weder löschen noch überschreiben – obwohl die Datei für die Gruppe beschreibbar ist (`rw-rw-r--`).
+
+- Das **Löschen** verhindert das Sticky Bit. Es schützt nur den **Verzeichniseintrag** (Löschen, Umbenennen), nicht den Inhalt.
+- Das **Überschreiben** verhindert der Kernel mit `fs.protected_regular`. Beim Wert `2` darf in einem Ordner mit Sticky Bit, der für alle **oder für eine Gruppe** beschreibbar ist, niemand eine fremde Datei mit `>` oder `>>` öffnen (Ausnahme: Die Datei gehört dem Besitzer des Ordners). Beim Wert `1` gilt das nur für Ordner, die für alle beschreibbar sind, wie `/tmp`. Im Vertriebsordner (T2-02) gibt es kein Sticky Bit – deshalb durfte Murat dort anhängen.
+- Gedacht ist der Schutz für `/tmp`: Ein Angreifer legt dort vorab eine Datei mit einem vorhersehbaren Namen an, und ein Programm eines anderen Benutzers schreibt dann ahnungslos hinein.
+
+Für die Prüfung gilt die klassische Regel: Das Sticky Bit schützt vor dem Löschen und Umbenennen fremder Dateien. `protected_regular` ist eine Zusatzfunktion des Linux-Kernels.
+
+Löschen dürfen außerdem die Besitzerin oder der Besitzer des **Verzeichnisses** (hier `root`) und `root`. Kleines `t`: Sticky Bit und `x` für `others` gesetzt. Großes `T`: Sticky Bit gesetzt, aber kein `x` für `others`.
 
 **⭐⭐⭐:** `passwd` gehört `root` und hat `-rwsr-xr-x`. Das SUID-Bit sorgt dafür, dass das Programm mit den Rechten seines **Besitzers** (`root`) läuft, egal wer es startet. Deshalb kann `passwd` `/etc/shadow` schreiben – das Programm selbst achtet darauf, dass normale Benutzer nur ihr **eigenes** Passwort ändern. `sudo` braucht das SUID-Bit aus demselben Grund. Jedes SUID-Programm von `root` ist eine mögliche Hintertür: Hat es einen Fehler, bekommt ein Angreifer Root-Rechte.
 

@@ -137,7 +137,7 @@ Niemand von euch hat die Heimatverzeichnisse auf `700` gesetzt – trotzdem habe
    - Sucht in `/etc/login.defs` die Einstellung `HOME_MODE` (Erklärung in `man login.defs`).
    - Sucht in `/etc/adduser.conf` die Einstellung `DIR_MODE` (Erklärung in `man adduser.conf`).
 
-   Notiert beide Werte.
+   Notiert beide Werte. Was bedeutet das `#` vor `DIR_MODE`? Welcher Wert gilt dann? Die Antwort steht in `man adduser.conf`.
 2. Lest in `man login.defs` nach: Welcher Wert gilt für `useradd`, wenn `HOME_MODE` **nicht** gesetzt ist?
 3. Mit der Option `-K` von `useradd` könnt ihr eine Einstellung aus `/etc/login.defs` für einen einzigen Aufruf überschreiben, ohne die Datei zu ändern. Legt so ein Testkonto an:
 
@@ -248,6 +248,6 @@ Niemand kann das Heimatverzeichnis auflisten, aber wer den Pfad kennt, kommt an 
 
 Bei `400` und `600` zeigt `ls` die Namen, kann aber keine Details abrufen – je nach Alias erscheinen deshalb Fehlermeldungen oder Fragezeichen. Bei `711` haben Aylin und Lena an `/home/jbecker` nur `x`: kein Auflisten, aber Durchgehen zu bekannten Namen.
 
-**⭐⭐⭐:** Auf aktuellen Debian-Versionen steht in `/etc/login.defs` `HOME_MODE 0700` und in `/etc/adduser.conf` `DIR_MODE=0700` (bzw. ist das dort der Standardwert). Ohne `HOME_MODE` würde `useradd` die Rechte aus der `UMASK` in `/etc/login.defs` berechnen, z. B. `022` → `755`. Mit `-K HOME_MODE=0755` entsteht genau so ein Verzeichnis: Lena hätte in T1-06 alle Dateien von Jonas lesen können, die für `others` lesbar sind. Ältere Debian-Versionen haben Heimatverzeichnisse tatsächlich mit `755` angelegt. Eine Änderung in `/etc/login.defs` wirkt nur auf **neue** Konten, bestehende Verzeichnisse bleiben unverändert.
+**⭐⭐⭐:** Auf aktuellen Debian-Versionen steht in `/etc/login.defs` `HOME_MODE 0700`. In `/etc/adduser.conf` ist `#DIR_MODE=0700` auskommentiert – die Zeile zeigt nur den Standardwert, den `adduser` ohnehin verwendet. Ohne `HOME_MODE` würde `useradd` die Rechte aus der `UMASK` in `/etc/login.defs` berechnen, z. B. `022` → `755`. Mit `-K HOME_MODE=0755` entsteht genau so ein Verzeichnis: Lena hätte in T1-06 alle Dateien von Jonas lesen können, die für `others` lesbar sind. Ältere Debian-Versionen haben Heimatverzeichnisse tatsächlich mit `755` angelegt. Eine Änderung in `/etc/login.defs` wirkt nur auf **neue** Konten, bestehende Verzeichnisse bleiben unverändert.
 
 </details>
