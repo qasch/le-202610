@@ -1,27 +1,27 @@
-# T1-05 – Sonderfälle
+# T1-05: Sonderfälle
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Ein paar Änderungen …
 >
 > Hallo IT,
 >
-> kaum ist alles eingerichtet, gibt es schon Änderungen – so ist das eben in einer echten Firma:
+> kaum ist alles eingerichtet, gibt es schon Änderungen. So ist das eben in einer echten Firma:
 >
-> 1. Ab morgen haben wir eine Praktikantin in der Entwicklung: **Mia Neumann**. Ihr Praktikum endet am **31.01.2027**. Danach soll sie sich nicht mehr anmelden können – auch wenn wir vergessen, ihr Konto zu löschen.
+> 1. Ab morgen haben wir eine Praktikantin in der Entwicklung: **Mia Neumann**. Ihr Praktikum endet am **31.01.2027**. Danach soll sie sich nicht mehr anmelden können, auch wenn wir vergessen, ihr Konto zu löschen.
 > 2. **Murat Kaya** aus dem Vertrieb unterstützt ab sofort zusätzlich die Entwicklung. Er braucht also Zugriff auf beide Abteilungen.
-> 3. **Eva Lindner** aus der Buchhaltung geht für ein Jahr in Elternzeit. Ihr Konto soll in dieser Zeit gesperrt sein. Bitte **nicht löschen** – sie kommt ja wieder, und ihre Daten brauchen wir auch noch.
+> 3. **Eva Lindner** aus der Buchhaltung geht für ein Jahr in Elternzeit. Ihr Konto soll in dieser Zeit gesperrt sein. Bitte **nicht löschen**, sie kommt ja wieder, und ihre Daten brauchen wir auch noch.
 > 4. Für die Datensicherung, die wir in ein paar Tagen einrichten, braucht ihr ein eigenes Dienstkonto `pinguin-backup`. Damit soll sich niemand anmelden können.
 >
 > Grete
 
 Alle Schritte führt ihr **auf dem Server** mit `sudo` aus. Wechselt bei jedem Fall die Rollen.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Fall 1: Praktikantin mit Ablaufdatum
 
 1. Sucht in `man useradd` die Option, mit der man ein Ablaufdatum (*expire date*) für ein Konto festlegt. Notiert, in welchem Format das Datum angegeben wird.
-2. Legt das Konto `mneumann` für Mia Neumann an – mit allen Richtlinien der IT wie in T1-04 **und** dem Ablaufdatum 31.01.2027.
+2. Legt das Konto `mneumann` für Mia Neumann an, mit allen Richtlinien der IT wie in T1-04 **und** dem Ablaufdatum 31.01.2027.
 3. Setzt das Startpasswort und erzwingt die Passwortänderung bei der ersten Anmeldung.
 4. Prüft mit `sudo chage -l mneumann`. In der Zeile zum Ablauf des Kontos (`Account expires`, auf deutschsprachigen Systemen entsprechend übersetzt) muss der 31. Januar 2027 stehen.
 
@@ -49,7 +49,7 @@ Alle Schritte führt ihr **auf dem Server** mit `sudo` aus. Wechselt bei jedem F
 
 ### Selbstkontrolle
 
-Führt das Check-Skript aus. Im Abschnitt **T1-05** sollten alle Punkte grün sein – und im Abschnitt **T1-04** auch weiterhin.
+Führt das Check-Skript aus. Im Abschnitt **T1-05** sollten alle Punkte grün sein, und im Abschnitt **T1-04** auch weiterhin.
 
 ### Abnahmekriterien
 
@@ -59,21 +59,21 @@ Führt das Check-Skript aus. Im Abschnitt **T1-05** sollten alle Punkte grün se
 - Das Konto `elindner` ist gesperrt, hat aber weiterhin ein Passwort.
 - `pinguin-backup` ist ein Systemkonto (UID unter 1000) ohne Login-Shell und ohne Passwort.
 
-## ⭐⭐ Erweiterung
+## Erweiterung
 
 ### Eva Lindner kommt zurück
 
 1. Entsperrt das Konto von Eva Lindner.
 2. Prüft die Zeile in `/etc/shadow`: Ist das zweite Feld wieder wie vor der Sperre?
 3. Testet die Anmeldung per SSH mit dem Startpasswort. Klappt es?
-4. Sperrt das Konto anschließend **wieder** – Eva ist ja noch in Elternzeit.
+4. Sperrt das Konto anschließend **wieder**. Eva ist ja noch in Elternzeit.
 
 ### Ablaufdatum genauer ansehen
 
 1. Gebt mit `sudo grep mneumann /etc/shadow` die Zeile von Mia Neumann aus. In welchem Feld steht das Ablaufdatum, und warum ist es eine Zahl und kein Datum?
 2. Rechnet nach: Mit `date -d @$((ZAHL * 86400))` (`ZAHL` ersetzt ihr durch den Wert aus der Datei) könnt ihr die Zahl in ein Datum umrechnen.
 
-## ⭐⭐⭐ Profi: Drei Wege, eine Anmeldung zu verhindern
+## Profi: Drei Wege, eine Anmeldung zu verhindern
 
 1. Füllt im Logbuch diese Tabelle aus:
 
@@ -91,10 +91,10 @@ Führt das Check-Skript aus. Im Abschnitt **T1-05** sollten alle Punkte grün se
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - Ablaufdatum: Sucht in `man useradd` und `man usermod` nach `expire`.
-- Gruppen ändern: `man usermod` – lest die Beschreibung von `-G` **und** von `-a`.
+- Gruppen ändern: `man usermod`. Lest die Beschreibung von `-G` **und** von `-a`.
 - Sperren und Entsperren: Sucht in `man usermod` nach `lock`.
 - Systemkonten: Sucht in `man useradd` nach `system`.
 - Ablaufdaten anzeigen: `man chage`, Option `-l`
@@ -102,7 +102,7 @@ Führt das Check-Skript aus. Im Abschnitt **T1-05** sollten alle Punkte grün se
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 useradd -e JJJJ-MM-TT ...
@@ -116,7 +116,7 @@ su - <benutzer>
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 ```bash
 # Fall 1: Praktikantin mit Ablaufdatum
@@ -125,7 +125,7 @@ sudo passwd mneumann
 sudo chage -d 0 mneumann
 sudo chage -l mneumann
 
-# Fall 2: Murat Kaya zusätzlich in die Entwicklung – OHNE -a würde er
+# Fall 2: Murat Kaya zusätzlich in die Entwicklung. OHNE -a würde er
 #         aus allen anderen zusätzlichen Gruppen entfernt!
 id mkaya
 sudo usermod -aG entwicklung mkaya
@@ -142,15 +142,15 @@ grep pinguin-backup /etc/passwd
 sudo su - pinguin-backup         # This account is currently not available.
 ```
 
-**Fall 2:** Wer `usermod -G entwicklung mkaya` ohne `-a` verwendet hat, hat Murat aus `vertrieb` und `mitarbeitende` entfernt: `-G` setzt die **vollständige** Liste der zusätzlichen Gruppen. Reparieren mit `sudo usermod -aG vertrieb,mitarbeitende mkaya`. Dieser Fehler passiert auch erfahrenen Admins – deshalb: immer mit `id` kontrollieren.
+**Fall 2:** Wer `usermod -G entwicklung mkaya` ohne `-a` verwendet hat, hat Murat aus `vertrieb` und `mitarbeitende` entfernt: `-G` setzt die **vollständige** Liste der zusätzlichen Gruppen. Reparieren mit `sudo usermod -aG vertrieb,mitarbeitende mkaya`. Dieser Fehler passiert auch erfahrenen Admins. Deshalb immer mit `id` kontrollieren.
 
 **Fall 3:** `usermod -L` setzt ein `!` vor den Passwort-Hash. Der Hash bleibt erhalten, kann aber nicht mehr passen.
 
-**⭐⭐ Rückkehr:** `sudo usermod -U elindner` entfernt das `!` wieder – Eva kann sich danach mit ihrem alten Passwort anmelden.
+**Erweiterung Rückkehr:** `sudo usermod -U elindner` entfernt das `!` wieder. Eva kann sich danach mit ihrem alten Passwort anmelden.
 
-**⭐⭐ Ablaufdatum:** Feld 8 in `/etc/shadow`. Alle Datumsangaben in `/etc/shadow` werden als Anzahl der Tage seit dem 01.01.1970 gespeichert.
+**Erweiterung Ablaufdatum:** Feld 8 in `/etc/shadow`. Alle Datumsangaben in `/etc/shadow` werden als Anzahl der Tage seit dem 01.01.1970 gespeichert.
 
-**⭐⭐⭐:**
+**Profi:**
 
 | Methode | Kommando | Was wird verändert? | Passwort | SSH-Schlüssel |
 |---|---|---|---|---|

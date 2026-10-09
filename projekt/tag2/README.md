@@ -1,15 +1,15 @@
-# Tag 2 – Abteilungsordner und Berechtigungen
+# Tag 2: Abteilungsordner und Berechtigungen
 
-Gestern habt ihr die Firma angelegt. Heute sorgt ihr dafür, dass jede Person genau das sehen und ändern darf, was sie braucht – nicht mehr und nicht weniger: private Heimatverzeichnisse, gemeinsame Abteilungsordner, ein Austauschordner für alle, ein kniffliger Wunsch der Geschäftsführung, Verknüpfungen und ein Abschied.
+Gestern habt ihr die Firma angelegt. Heute sorgt ihr dafür, dass jede Person genau das sehen und ändern darf, was sie braucht, nicht mehr und nicht weniger: private Heimatverzeichnisse, gemeinsame Abteilungsordner, ein Austauschordner für alle, ein kniffliger Wunsch der Geschäftsführung, Verknüpfungen und ein Abschied.
 
-| Ticket | Thema | Stufen |
-|---|---|---|
-| [T2-01](./T2-01-heimatverzeichnisse.md) | Heimatverzeichnisse absichern | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T2-02](./T2-02-abteilungsordner.md) | Abteilungsordner | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T2-03](./T2-03-austauschordner.md) | Austauschordner für alle | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T2-04](./T2-04-lesezugriff-geschaeftsfuehrung.md) | **Bonus:** Lesezugriff für die Geschäftsführung | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T2-05](./T2-05-verknuepfungen.md) | Verknüpfungen: Symlinks und Hardlinks | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T2-06](./T2-06-offboarding.md) | Offboarding | ⭐ ⭐⭐ ⭐⭐⭐ |
+| Ticket | Thema |
+|---|---|
+| [T2-01](./T2-01-heimatverzeichnisse.md) | Heimatverzeichnisse absichern |
+| [T2-02](./T2-02-abteilungsordner.md) | Abteilungsordner |
+| [T2-03](./T2-03-austauschordner.md) | Austauschordner für alle |
+| [T2-04](./T2-04-lesezugriff-geschaeftsfuehrung.md) | **Bonus:** Lesezugriff für die Geschäftsführung |
+| [T2-05](./T2-05-verknuepfungen.md) | Verknüpfungen: Symlinks und Hardlinks |
+| [T2-06](./T2-06-offboarding.md) | Offboarding |
 
 Bearbeitet die Tickets in dieser Reihenfolge. T2-02 ist die Voraussetzung für T2-03 bis T2-06.
 
@@ -23,7 +23,7 @@ Tag 2 baut auf den Gruppen und Konten von Tag 1 auf. Lasst zuerst das Check-Skri
 sudo bash check-tag1.sh
 ```
 
-Sind in den Abschnitten **T1-03 bis T1-05** Punkte rot – zum Beispiel, weil ihr gestern nicht fertig geworden seid –, holt den fehlenden Stand mit dem Aufhol-Skript nach:
+Sind in den Abschnitten **T1-03 bis T1-05** Punkte rot (zum Beispiel, weil ihr gestern nicht fertig geworden seid), holt den fehlenden Stand mit dem Aufhol-Skript nach:
 
 ```bash
 wget https://raw.githubusercontent.com/qasch/le-202610/main/projekt/aufholen/aufholen-tag2.sh
@@ -32,7 +32,7 @@ sudo bash aufholen-tag2.sh
 
 Das Skript ergänzt nur, was fehlt, und zeigt jede Änderung mit dem Kommando und einer Begründung an. Sucht euch **drei** dieser Zeilen aus und erklärt sie im Logbuch: Was tut das Kommando, und in welchem Ticket hättet ihr es gebraucht?
 
-Hostname und persönliche Admin-Konten (T1-01) richtet das Skript nicht ein – die braucht ihr ohnehin, um überhaupt arbeiten zu können.
+Hostname und persönliche Admin-Konten (T1-01) richtet das Skript nicht ein. Die braucht ihr ohnehin, um überhaupt arbeiten zu können.
 
 ## Neu heute: Als eine andere Person testen
 
@@ -46,7 +46,7 @@ exit                 # zurück zum eigenen Konto
 
 Ihr braucht dafür nicht das Passwort der Person. Anders als `sudo su - lwagner` verlangt `sudo -iu` auch dann keine Passwortänderung, wenn sich die Person noch nie angemeldet hat.
 
-**Wichtig:** Testet nie mit `sudo` vor dem eigentlichen Kommando – `root` darf (fast) alles, und ihr würdet nichts über die Rechte lernen.
+**Wichtig:** Testet nie mit `sudo` vor dem eigentlichen Kommando. `root` darf (fast) alles, und ihr würdet nichts über die Rechte lernen.
 
 ## Selbstkontrolle
 

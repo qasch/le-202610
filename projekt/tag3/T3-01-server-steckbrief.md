@@ -1,4 +1,4 @@
-# T3-01 – Server-Steckbrief
+# T3-01: Server-Steckbrief
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Was steht da eigentlich?
@@ -7,13 +7,13 @@
 >
 > unsere Versicherung möchte wissen, welche Technik wir einsetzen, und der Steuerberater fragt, was der Server „kann“. Ehrlich gesagt weiß ich das selbst nicht.
 >
-> Könnt ihr mir einen **Steckbrief** des Servers schreiben – auf einer Seite, als Textdatei in meinem Ordner? Was steckt drin, welches System läuft, wie ist er ans Netz angeschlossen?
+> Könnt ihr mir einen **Steckbrief** des Servers schreiben, auf einer Seite, als Textdatei in meinem Ordner? Was steckt drin, welches System läuft, wie ist er ans Netz angeschlossen?
 >
 > Grete
 
 Alle Schritte führt ihr **auf dem Server** aus. Bis auf Schritt 4 braucht ihr kein `sudo`.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Informationen sammeln
 
@@ -81,7 +81,7 @@ Führt das Check-Skript aus. Im Abschnitt **T3-01** sollten alle Punkte grün se
 - Der Steckbrief enthält den Hostnamen, die Zeile `PRETTY_NAME`, die Ausgabe von `free -h` (Zeile `Mem:`), die Zeile mit dem Standard-Gateway (`default via`) und mindestens eine Zeile `nameserver`.
 - Grete kann den Steckbrief lesen.
 
-## ⭐⭐ Erweiterung: Prozesse und Dienste
+## Erweiterung: Prozesse und Dienste
 
 Grete möchte außerdem wissen, was auf dem Server **läuft**.
 
@@ -91,7 +91,7 @@ Grete möchte außerdem wissen, was auf dem Server **läuft**.
 4. Lasst euch mit `sudo ss -tlnp` anzeigen, auf welchen Netzwerk-Ports der Server Verbindungen annimmt. Welches Programm lauscht auf Port 22? Gibt es weitere?
 5. Hängt die Ausgaben von Punkt 2 und 4 mit passenden Überschriften an den Steckbrief an und kopiert ihn erneut zu Grete.
 
-## ⭐⭐⭐ Profi: Hardware und Virtualisierung
+## Profi: Hardware und Virtualisierung
 
 1. Führt `hostnamectl` aus. Welche Angaben aus Schritt 1 findet ihr dort auf einen Blick? Welche zusätzliche Angabe verrät, dass der Server eine VM ist?
 2. Prüft mit `systemd-detect-virt`, unter welcher Virtualisierung der Server läuft.
@@ -105,19 +105,19 @@ Grete möchte außerdem wissen, was auf dem Server **läuft**.
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - `/proc` ist ein virtuelles Dateisystem: Der Kernel erzeugt den Inhalt beim Lesen. Dort stehen u. a. `cpuinfo`, `meminfo` und für jeden Prozess ein Verzeichnis mit seiner PID.
 - Distribution: `/etc/os-release`, Kernel: `man uname`
 - Netzwerk: `man ip-address`, `man ip-route`, DNS: `man resolv.conf`, bei `nameserver 127.0.0.53` zusätzlich `man systemd-resolved` und `resolvectl status`
 - Redirects: `>` überschreibt, `>>` hängt an.
-- Befehlssubstitution `$( … )`: Die Shell führt das Kommando aus und setzt seine Ausgabe an dieser Stelle ein – nur in doppelten Anführungszeichen oder ganz ohne.
+- Befehlssubstitution `$( … )`: Die Shell führt das Kommando aus und setzt seine Ausgabe an dieser Stelle ein, nur in doppelten Anführungszeichen oder ganz ohne.
 - Prozesse: `man ps` (`--sort`), `man top`, Netzwerk-Ports: `man ss`
 
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 grep -c "model name" /proc/cpuinfo
@@ -135,7 +135,7 @@ sudo ss -tlnp
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 ```bash
 # Schritt 2
@@ -159,9 +159,9 @@ ls -l /srv/firma/geschaeftsfuehrung
 sudo -iu gfrost cat /srv/firma/geschaeftsfuehrung/server-steckbrief.txt
 ```
 
-Die Variable `S` ist nur eine Abkürzung zum Tippen – mehr zu Variablen in T3-05.
+Die Variable `S` ist nur eine Abkürzung zum Tippen. Mehr zu Variablen in T3-05.
 
-**Schritt 1:** `/proc/cpuinfo` enthält einen Block pro CPU-Kern, deshalb steht `model name` mehrfach drin. Das Standard-Gateway steht in der Zeile `default via <IP> dev <schnittstelle>`. `/proc` ist ein **virtuelles Dateisystem**: Die Dateien liegen nicht auf der Festplatte, der Kernel erzeugt ihren Inhalt in dem Moment, in dem man sie liest – deshalb die Größe 0. Aus Dateien kommen Distribution, Prozessor, DNS-Server; aus Programmen der Rest (die ihre Daten aber oft selbst aus `/proc` lesen).
+**Schritt 1:** `/proc/cpuinfo` enthält einen Block pro CPU-Kern, deshalb steht `model name` mehrfach drin. Das Standard-Gateway steht in der Zeile `default via <IP> dev <schnittstelle>`. `/proc` ist ein **virtuelles Dateisystem**: Die Dateien liegen nicht auf der Festplatte, der Kernel erzeugt ihren Inhalt in dem Moment, in dem man sie liest, deshalb die Größe 0. Aus Dateien kommen Distribution, Prozessor, DNS-Server; aus Programmen der Rest (die ihre Daten aber oft selbst aus `/proc` lesen).
 
 `nameserver 127.0.0.53` bedeutet: Auf dem Server läuft `systemd-resolved` als lokaler Zwischenspeicher (*DNS-Stub*). Programme fragen ihn, er fragt die eigentlichen DNS-Server und merkt sich die Antworten. Welche das sind, zeigt `resolvectl status` (Zeilen `Current DNS Server` und `DNS Servers`). Steht in `/etc/resolv.conf` dagegen direkt eine andere Adresse, wird ohne Zwischenspeicher gefragt.
 
@@ -169,7 +169,7 @@ Die Variable `S` ist nur eine Abkürzung zum Tippen – mehr zu Variablen in T3-
 
 **Schritt 4:** `cp` legt eine **neue** Datei an. Der Ordner hat das SGID-Bit, deshalb gehört die Datei der Gruppe `geschaeftsfuehrung`, Besitzer ist `root`. Mit den Rechten `644` darf Grete sie als Mitglied der Gruppe lesen.
 
-**⭐⭐:**
+**Erweiterung:**
 
 ```bash
 ps -e --no-headers | wc -l
@@ -177,8 +177,8 @@ ps aux --sort=-%mem | head -n 6          # 1 Kopfzeile + 5 Prozesse
 sudo ss -tlnp                             # Port 22: sshd
 ```
 
-Von außen erreichbar ist meist nur `sshd` auf Port 22 (IPv4 `0.0.0.0:22` und IPv6 `[::]:22`). Läuft `systemd-resolved`, lauscht es zusätzlich auf Port 53 – aber nur auf `127.0.0.53` und `127.0.0.54`, also nur für den Server selbst – und auf Port 5355 (LLMNR, Namensauflösung im lokalen Netz ohne DNS-Server). `-t` = TCP, `-l` = lauschend (*listening*), `-n` = Zahlen statt Namen, `-p` = Prozess anzeigen (braucht `sudo`).
+Von außen erreichbar ist meist nur `sshd` auf Port 22 (IPv4 `0.0.0.0:22` und IPv6 `[::]:22`). Läuft `systemd-resolved`, lauscht es zusätzlich auf Port 53, aber nur auf `127.0.0.53` und `127.0.0.54` (also nur für den Server selbst), und auf Port 5355 (LLMNR, Namensauflösung im lokalen Netz ohne DNS-Server). `-t` = TCP, `-l` = lauschend (*listening*), `-n` = Zahlen statt Namen, `-p` = Prozess anzeigen (braucht `sudo`).
 
-**⭐⭐⭐:** `hostnamectl` zeigt u. a. Betriebssystem, Kernel, Architektur und eine Zeile `Virtualization` (z. B. `oracle` für VirtualBox oder `kvm`). Die Festplatte heißt meist `/dev/sda` oder `/dev/vda`. `free` liest seine Zahlen aus `/proc/meminfo`.
+**Profi:** `hostnamectl` zeigt u. a. Betriebssystem, Kernel, Architektur und eine Zeile `Virtualization` (z. B. `oracle` für VirtualBox oder `kvm`). Die Festplatte heißt meist `/dev/sda` oder `/dev/vda`. `free` liest seine Zahlen aus `/proc/meminfo`.
 
 </details>

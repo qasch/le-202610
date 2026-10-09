@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# check-tag2.sh – Selbstkontrolle für Tag 2 des Projekts "Pinguin GmbH"
+# check-tag2.sh: Selbstkontrolle für Tag 2 des Projekts "Pinguin GmbH"
 #
 # Aufruf auf dem Teamserver:
 #   sudo bash check-tag2.sh
@@ -35,19 +35,19 @@ gesamt=0
 ok() {
 	bestanden=$((bestanden + 1))
 	gesamt=$((gesamt + 1))
-	printf '  %s✔%s %s\n' "$gruen" "$normal" "$1"
+	printf '  %s[OK]%s %s\n' "$gruen" "$normal" "$1"
 }
 
 fehler() {
 	gesamt=$((gesamt + 1))
-	printf '  %s✘%s %s\n' "$rot" "$normal" "$1"
+	printf '  %s[FEHLER]%s %s\n' "$rot" "$normal" "$1"
 	if [[ -n "$2" ]]; then
-		printf '      %s→ %s%s\n' "$gelb" "$2" "$normal"
+		printf '      %sTipp: %s%s\n' "$gelb" "$2" "$normal"
 	fi
 }
 
 info() {
-	printf '  %sℹ%s %s\n' "$gelb" "$normal" "$1"
+	printf '  %s[INFO]%s %s\n' "$gelb" "$normal" "$1"
 }
 
 ueberschrift() {
@@ -65,7 +65,7 @@ existiert() {
 	awk -F: -v name="$name" '$1 == name { gefunden = 1 } END { exit !gefunden }' "$etc/$datei"
 }
 
-# Name zu einer UID bzw. GID – oder die Nummer, wenn es keinen Namen gibt
+# Name zu einer UID bzw. GID, oder die Nummer, wenn es keinen Namen gibt
 name_zu() {
 	local datei="$1" nummer="$2" name
 	name="$(awk -F: -v nr="$nummer" '$3 == nr { print $1; exit }' "$etc/$datei")"
@@ -82,7 +82,7 @@ in_gruppe() {
 }
 
 # Prüft Besitzer, Gruppe und Rechte eines Pfads. Gibt die gefundenen
-# Probleme aus (eines pro Zeile) – keine Ausgabe bedeutet: alles in Ordnung.
+# Probleme aus (eines pro Zeile), keine Ausgabe bedeutet: alles in Ordnung.
 # Ein "-" bei Gruppe oder Rechten überspringt die jeweilige Prüfung.
 # Besitzer und Gruppe werden numerisch über $etc/passwd bzw. $etc/group
 # verglichen, damit das auch im Testsystem funktioniert.
@@ -119,7 +119,7 @@ if [[ -z "$CHECK_ROOT" && $EUID -ne 0 ]]; then
 	exit 1
 fi
 
-printf '%sSelbstkontrolle Tag 2 – Pinguin GmbH%s\n' "$fett" "$normal"
+printf '%sSelbstkontrolle Tag 2, Pinguin GmbH%s\n' "$fett" "$normal"
 printf 'Server: %s\n' "$hostname"
 
 # --- T2-01 ------------------------------------------------------------------
@@ -141,7 +141,7 @@ if [[ $fehlerhaft -eq 0 ]]; then
 fi
 
 if existiert passwd htest; then
-	info "⭐⭐⭐ Das Testkonto htest existiert noch – bitte mit userdel -r löschen"
+	info "Profi: Das Testkonto htest existiert noch, bitte mit userdel -r löschen"
 fi
 
 # --- T2-02 ------------------------------------------------------------------
@@ -159,7 +159,7 @@ for abteilung in "${abteilungen[@]}"; do
 
 	# Ansatz 3 aus T2-04: Grete als Besitzerin des Vertriebsordners
 	if [[ $abteilung == vertrieb && -z "$(probleme_pfad "$pfad" gfrost vertrieb 2570)" ]]; then
-		ok "$pfad (gfrost:vertrieb, 2570 – Ansatz 3 aus T2-04)"
+		ok "$pfad (gfrost:vertrieb, 2570, Ansatz 3 aus T2-04)"
 		continue
 	fi
 
@@ -169,8 +169,8 @@ for abteilung in "${abteilungen[@]}"; do
 	else
 		hinweis=""
 		case "$(rechte_von "$pfad")" in
-			770) hinweis="SGID-Bit fehlt – neue Dateien gehören sonst der privaten Gruppe" ;;
-			2775 | 775) hinweis="others haben Rechte – Rückbau aus T2-04 ⭐⭐ vergessen?" ;;
+			770) hinweis="SGID-Bit fehlt, neue Dateien gehören sonst der privaten Gruppe" ;;
+			2775 | 775) hinweis="others haben Rechte. Rückbau aus T2-04 Erweiterung vergessen?" ;;
 		esac
 		fehler "$pfad: $(zeile <<<"$probleme")" "$hinweis"
 	fi
@@ -188,7 +188,7 @@ done
 if [[ ${#falsch[@]} -eq 0 ]]; then
 	ok "Alle Dateien in den Abteilungsordnern gehören der Abteilungsgruppe"
 else
-	fehler "Falsche Gruppe: ${falsch[*]:0:5}" "chgrp <abteilung> <datei> – mit mv verschoben statt kopiert?"
+	fehler "Falsche Gruppe: ${falsch[*]:0:5}" "chgrp <abteilung> <datei>. Mit mv verschoben statt kopiert?"
 fi
 
 # --- T2-03 ------------------------------------------------------------------
@@ -201,8 +201,8 @@ if [[ -z "$probleme" ]]; then
 else
 	hinweis=""
 	case "$(rechte_von "$pfad")" in
-		2770) hinweis="Sticky Bit fehlt – jede Person kann fremde Dateien löschen" ;;
-		1770) hinweis="SGID-Bit fehlt – neue Dateien gehören sonst der privaten Gruppe" ;;
+		2770) hinweis="Sticky Bit fehlt, jede Person kann fremde Dateien löschen" ;;
+		1770) hinweis="SGID-Bit fehlt, neue Dateien gehören sonst der privaten Gruppe" ;;
 	esac
 	fehler "$pfad: $(zeile <<<"$probleme")" "$hinweis"
 fi
@@ -259,7 +259,7 @@ done
 if [[ ${#uebrig[@]} -eq 0 ]]; then
 	ok "Die Versuchslinks spion und tippfehler sind gelöscht"
 else
-	fehler "Noch vorhanden: ${uebrig[*]}" "rm <link> – ohne Schrägstrich am Ende"
+	fehler "Noch vorhanden: ${uebrig[*]}" "rm <link>, ohne Schrägstrich am Ende"
 fi
 
 # --- T2-06 ------------------------------------------------------------------
@@ -281,7 +281,7 @@ probleme="$(probleme_pfad /srv/archiv root root 700)"
 if [[ -z "$probleme" ]]; then
 	ok "/srv/archiv (root:root, 700)"
 else
-	fehler "/srv/archiv: $(zeile <<<"$probleme")" "Archive enthalten vertrauliche Daten – nur root darf hinein"
+	fehler "/srv/archiv: $(zeile <<<"$probleme")" "Archive enthalten vertrauliche Daten, nur root darf hinein"
 fi
 
 archiv=/srv/archiv/oweber-home.tar.gz
@@ -322,15 +322,15 @@ else
 fi
 
 for testkonto in utest vtest; do
-	existiert passwd "$testkonto" && info "⭐⭐⭐ Das Testkonto $testkonto existiert noch – bitte mit userdel -r löschen"
+	existiert passwd "$testkonto" && info "Profi: Das Testkonto $testkonto existiert noch, bitte mit userdel -r löschen"
 done
 [[ -e "$wurzel/root/wiederherstellung" ]] &&
-	info "⭐⭐ /root/wiederherstellung existiert noch – bitte nach ⭐⭐⭐ löschen"
+	info "Erweiterung: /root/wiederherstellung existiert noch, bitte nach Profi löschen"
 
 # --- Ergebnis ---------------------------------------------------------------
 echo
 if [[ $bestanden -eq $gesamt ]]; then
-	printf '%s%s🎉 %d von %d Prüfungen bestanden – Tag 2 abgenommen!%s\n' \
+	printf '%s%s%d von %d Prüfungen bestanden, Tag 2 abgenommen.%s\n' \
 		"$fett" "$gruen" "$bestanden" "$gesamt" "$normal"
 else
 	printf '%s%d von %d Prüfungen bestanden.%s\n' "$fett" "$bestanden" "$gesamt" "$normal"

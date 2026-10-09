@@ -1,6 +1,6 @@
 # Projekt: Die Pinguin GmbH zieht auf Linux um
 
-In den letzten vier Kurstagen seid ihr die neue IT-Abteilung der **Pinguin GmbH**. Statt Übungsblättern bekommt ihr **Tickets** – so, wie sie auch im Arbeitsalltag einer Administratorin oder eines Administrators auf dem Tisch landen.
+In den letzten vier Kurstagen seid ihr die neue IT-Abteilung der **Pinguin GmbH**. Statt Übungsblättern bekommt ihr **Tickets**, so wie sie auch im Arbeitsalltag einer Administratorin oder eines Administrators auf dem Tisch landen.
 
 Ihr arbeitet im Team auf einem gemeinsamen Server, legt die Firma an, sorgt für saubere Berechtigungen, analysiert das System und behebt am Ende echte Störungen.
 
@@ -29,7 +29,7 @@ Lest die Tickets im Browser auf GitHub: <https://github.com/qasch/le-202610/tree
 
 Bei jedem Ticket wechseln die Rollen:
 
-- **Tastatur:** tippt – und nur das, was das Team gemeinsam beschlossen hat.
+- **Tastatur:** tippt, und zwar nur das, was das Team gemeinsam beschlossen hat.
 - **Navigation:** sagt, was zu tun ist, und erklärt, warum.
 - **Logbuch:** dokumentiert Kommandos, Erkenntnisse und Stolpersteine im [Admin-Logbuch](./vorlagen/admin-logbuch.md).
 
@@ -39,9 +39,9 @@ Wer sich schon sicher fühlt, übernimmt bevorzugt die Navigation: Erklären ist
 
 Jedes Ticket hat bis zu drei Stufen:
 
-- ⭐ **Pflicht** – schafft jedes Team.
-- ⭐⭐ **Erweiterung** – für alle, die noch Zeit haben.
-- ⭐⭐⭐ **Profi** – für alle, die es genau wissen wollen.
+- **Pflicht:** schafft jedes Team.
+- **Erweiterung:** für alle, die noch Zeit haben.
+- **Profi:** für alle, die es genau wissen wollen.
 
 Es ist völlig in Ordnung, nur die Pflicht zu schaffen. Lieber verstanden als abgehakt.
 
@@ -49,9 +49,9 @@ Es ist völlig in Ordnung, nur die Pflicht zu schaffen. Lieber verstanden als ab
 
 Zu jedem Ticket gibt es Hilfekarten, die ihr selbst aufklappt:
 
-1. **Wo steht's?** – ein Hinweis auf Manpage oder Thema
-2. **Welches Kommando?** – die benötigten Kommandos
-3. **Lösung** – eine Musterlösung mit Erklärung
+1. **Wo steht's?** Ein Hinweis auf Manpage oder Thema
+2. **Welches Kommando?** Die benötigten Kommandos
+3. **Lösung:** Eine Musterlösung mit Erklärung
 
 Versucht es zuerst ohne. Wenn ihr länger als 10 Minuten feststeckt, deckt die nächste Karte auf.
 

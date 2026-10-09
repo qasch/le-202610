@@ -1,4 +1,4 @@
-# T3-03 – Sicherheitsaudit des eigenen Servers
+# T3-03: Sicherheitsaudit des eigenen Servers
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Und bei uns?
@@ -16,7 +16,7 @@ Haltet jede Prüfung im Logbuch in dieser Tabelle fest:
 | Nr. | Prüfung | Kommando | Befund | Bewertung (in Ordnung / prüfen) |
 |---|---|---|---|---|
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Prüfung 1: Wer hat Root-Rechte?
 
@@ -31,7 +31,7 @@ Haltet jede Prüfung im Logbuch in dieser Tabelle fest:
 
 ### Prüfung 3: Hinterlegte SSH-Schlüssel
 
-Beim Einbruch auf `pinguin-dev` hat der Angreifer einen Schlüssel hinterlegt (T3-02 ⭐⭐⭐).
+Beim Einbruch auf `pinguin-dev` hat der Angreifer einen Schlüssel hinterlegt (T3-02 Profi).
 
 1. Sucht in `/home` und `/root` nach allen Dateien mit dem Namen `authorized_keys`.
 2. Notiert, wie viele ihr findet und wem sie gehören. Wisst ihr bei jeder Datei, warum sie da ist?
@@ -55,7 +55,7 @@ Beim Einbruch auf `pinguin-dev` hat der Angreifer einen Schlüssel hinterlegt (T
 ### Prüfung 7: Was hat sich kürzlich verändert?
 
 1. Sucht in `/etc` alle Dateien, die in den letzten drei Tagen verändert wurden (`-mtime -3`).
-2. Ordnet jede gefundene Datei einer Aufgabe aus den letzten Tagen zu. Zum Beispiel: `/etc/group` → T1-03 und T1-05. Gibt es eine Datei, die ihr nicht erklären könnt?
+2. Ordnet jede gefundene Datei einer Aufgabe aus den letzten Tagen zu. Zum Beispiel: `/etc/group` gehört zu T1-03 und T1-05. Gibt es eine Datei, die ihr nicht erklären könnt?
 
 ### Prüfung 8: Fehlgeschlagene Anmeldungen auf eurem Server
 
@@ -71,7 +71,7 @@ Beim Einbruch auf `pinguin-dev` hat der Angreifer einen Schlüssel hinterlegt (T
 
 Schreibt im Logbuch eine kurze Antwort an Grete: Was habt ihr geprüft (8 Punkte), was war in Ordnung, was müsst ihr euch noch genauer anschauen?
 
-## ⭐⭐ Erweiterung: Die SSH-Konfiguration
+## Erweiterung: Die SSH-Konfiguration
 
 1. Lasst euch die **tatsächlich gültige** Konfiguration des SSH-Servers ausgeben und filtert die wichtigsten Einstellungen:
 
@@ -83,16 +83,16 @@ Schreibt im Logbuch eine kurze Antwort an Grete: Was habt ihr geprüft (8 Punkte
 3. Welche dieser Einstellungen hätten den Einbruch auf `pinguin-dev` verhindert?
 4. Lasst euch mit `sudo ss -tlnp` anzeigen, welche Dienste von außen erreichbar sind. Ist das wirklich nur SSH?
 
-Ändert die Konfiguration **nicht** – sonst kommt ihr womöglich nicht mehr auf euren Server.
+Ändert die Konfiguration **nicht**, sonst kommt ihr womöglich nicht mehr auf euren Server.
 
-## ⭐⭐⭐ Profi: Anmeldung mit SSH-Schlüssel
+## Profi: Anmeldung mit SSH-Schlüssel
 
-Ihr richtet für **euer eigenes** Admin-Konto die Anmeldung per Schlüssel ein – so, wie es auf `pinguin-dev` sicher gewesen wäre.
+Ihr richtet für **euer eigenes** Admin-Konto die Anmeldung per Schlüssel ein, so wie es auf `pinguin-dev` sicher gewesen wäre.
 
 1. Erzeugt **auf eurem Arbeitsplatz** (nicht auf dem Server) ein Schlüsselpaar: `ssh-keygen -t ed25519`. Vergebt eine Passphrase.
 2. Schaut euch die beiden neuen Dateien in `~/.ssh` an. Welche davon ist geheim, welche darf jeder sehen? Vergleicht ihre Rechte.
 3. Kopiert den öffentlichen Schlüssel auf den Server: `ssh-copy-id <euer-konto>@<server>`
-4. Meldet euch erneut per SSH an. Was wird jetzt abgefragt – das Passwort oder die Passphrase?
+4. Meldet euch erneut per SSH an. Was wird jetzt abgefragt: das Passwort oder die Passphrase?
 5. Wiederholt **Prüfung 3** auf dem Server. Was findet ihr jetzt? Welche Rechte haben `~/.ssh` und `~/.ssh/authorized_keys`?
 6. Gebt testweise der Gruppe Schreibrecht an eurer `authorized_keys` (`chmod g+w ~/.ssh/authorized_keys`) und meldet euch in einem **zweiten** Terminal neu an. Was passiert? Sucht die Erklärung im Journal (`sudo journalctl -u ssh -n 20`). Setzt die Rechte danach wieder auf `600`.
 
@@ -101,9 +101,9 @@ Ihr richtet für **euer eigenes** Admin-Konto die Anmeldung per Schlüssel ein �
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
-- `find`: `man find` – Suchbegriffe `-name`, `-perm`, `-type`, `-nouser`, `-nogroup`, `-mtime`, `-xdev`
+- `find`: `man find`, Suchbegriffe `-name`, `-perm`, `-type`, `-nouser`, `-nogroup`, `-mtime`, `-xdev`
 - `-perm -4000` bedeutet „mindestens diese Bits gesetzt“. Mit `!` vor einem Test wird er verneint.
 - `-mtime -3` = vor weniger als drei Tagen verändert
 - Konten und Gruppen: `/etc/passwd`, `/etc/shadow`, `getent group <gruppe>`
@@ -112,7 +112,7 @@ Ihr richtet für **euer eigenes** Admin-Konto die Anmeldung per Schlüssel ein �
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 awk -F: '$3 == 0' /etc/passwd
@@ -131,13 +131,13 @@ sudo sshd -T
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 **Prüfung 1:** Nur `root` hat die UID 0. In `sudo` stehen genau eure persönlichen Admin-Konten.
 
-**Prüfung 2:** Keine Ausgabe. Systemkonten und `pinguin-backup` haben im zweiten Feld `!` oder `*` – damit ist eine Anmeldung mit Passwort **unmöglich**, nicht ohne Passwort möglich.
+**Prüfung 2:** Keine Ausgabe. Systemkonten und `pinguin-backup` haben im zweiten Feld `!` oder `*`. Damit ist eine Anmeldung mit Passwort **unmöglich**, nicht ohne Passwort möglich.
 
-**Prüfung 3:** Habt ihr selbst keine Schlüssel eingerichtet (⭐⭐⭐), sollte es keine `authorized_keys` geben. Ausnahmen: VMs, die aus einem Cloud-Image erstellt wurden, bekommen bei der Installation oft Schlüssel für das erste Konto und für `root` eingetragen. Dann klärt ihr, wem der Schlüssel gehört (der Kommentar am Ende der Zeile verrät es meist). Jede Datei, deren Herkunft ihr nicht kennt, ist ein Alarmzeichen.
+**Prüfung 3:** Habt ihr selbst keine Schlüssel eingerichtet (Profi), sollte es keine `authorized_keys` geben. Ausnahmen: VMs, die aus einem Cloud-Image erstellt wurden, bekommen bei der Installation oft Schlüssel für das erste Konto und für `root` eingetragen. Dann klärt ihr, wem der Schlüssel gehört (der Kommentar am Ende der Zeile verrät es meist). Jede Datei, deren Herkunft ihr nicht kennt, ist ein Alarmzeichen.
 
 **Prüfung 4:** Auf einem frischen Debian 13 etwa ein Dutzend Programme, z. B.:
 
@@ -154,11 +154,11 @@ Je nach installierten Paketen kommen einzelne Programme hinzu (z. B. `fusermount
 
 **Prüfung 6:** Keine Ausgabe, wenn in T2-06 alle Dateien von Oskar übergeben wurden.
 
-**Prüfung 7:** Die Liste hängt stark davon ab, wie und wann die VM installiert wurde (bei frisch aus einem Cloud-Image erstellten VMs z. B. auch `/etc/ssh/ssh_host_*`, `/etc/netplan/…`, `/etc/cloud/…`). Typische Funde aus dem Projekt und ihre Herkunft: `/etc/hostname`, `/etc/hosts` (T1-01), `/etc/passwd`, `/etc/shadow`, `/etc/group`, `/etc/gshadow` und ihre Sicherungskopien mit `-` am Ende (T1-01 bis T2-06), `/etc/skel/…` (T1-03 ⭐⭐), evtl. `/etc/subuid` und `/etc/subgid` (neue Konten). Je nach Netzwerk auch `/etc/resolv.conf` (wird beim Start per DHCP geschrieben).
+**Prüfung 7:** Die Liste hängt stark davon ab, wie und wann die VM installiert wurde (bei frisch aus einem Cloud-Image erstellten VMs z. B. auch `/etc/ssh/ssh_host_*`, `/etc/netplan/…`, `/etc/cloud/…`). Typische Funde aus dem Projekt und ihre Herkunft: `/etc/hostname`, `/etc/hosts` (T1-01), `/etc/passwd`, `/etc/shadow`, `/etc/group`, `/etc/gshadow` und ihre Sicherungskopien mit `-` am Ende (T1-01 bis T2-06), `/etc/skel/…` (T1-03 Erweiterung), evtl. `/etc/subuid` und `/etc/subgid` (neue Konten). Je nach Netzwerk auch `/etc/resolv.conf` (wird beim Start per DHCP geschrieben).
 
-**Prüfung 8:** Die Fehlversuche stammen von den Arbeitsplätzen eures Teams oder von anderen Teams aus dem Kurs (T1-02 ⭐⭐⭐, T1-05) – im Kursnetz gibt es keine Angreifer aus dem Internet.
+**Prüfung 8:** Die Fehlversuche stammen von den Arbeitsplätzen eures Teams oder von anderen Teams aus dem Kurs (T1-02 Profi, T1-05). Im Kursnetz gibt es keine Angreifer aus dem Internet.
 
-**⭐⭐:**
+**Erweiterung:**
 
 ```text
 permitrootlogin without-password
@@ -167,9 +167,9 @@ passwordauthentication yes
 maxauthtries 6
 ```
 
-`without-password` ist der alte Name für `prohibit-password`: `root` darf sich nur mit Schlüssel anmelden. In `sshd_config` stehen auskommentierte Zeilen, um die **Standardwerte** zu zeigen – `sshd -T` zeigt, was tatsächlich gilt. Auf `pinguin-dev` hätte `PasswordAuthentication no` den Einbruch verhindert: Ohne Passwort-Anmeldung hilft das Erraten nichts. `ss -tlnp` zeigt `sshd` auf Port 22 und, falls `systemd-resolved` läuft, Port 53 nur auf `127.0.0.53`/`127.0.0.54` sowie Port 5355 (LLMNR) – siehe T3-01 ⭐⭐.
+`without-password` ist der alte Name für `prohibit-password`: `root` darf sich nur mit Schlüssel anmelden. In `sshd_config` stehen auskommentierte Zeilen, um die **Standardwerte** zu zeigen. `sshd -T` zeigt, was tatsächlich gilt. Auf `pinguin-dev` hätte `PasswordAuthentication no` den Einbruch verhindert: Ohne Passwort-Anmeldung hilft das Erraten nichts. `ss -tlnp` zeigt `sshd` auf Port 22 und, falls `systemd-resolved` läuft, Port 53 nur auf `127.0.0.53`/`127.0.0.54` sowie Port 5355 (LLMNR), siehe T3-01 Erweiterung.
 
-**⭐⭐⭐:** `id_ed25519` ist der **private** Schlüssel (`-rw-------`, niemals weitergeben), `id_ed25519.pub` der **öffentliche** (`-rw-r--r--`). `ssh-copy-id` hängt den öffentlichen Schlüssel an `~/.ssh/authorized_keys` auf dem Server an. Bei der Anmeldung wird die Passphrase des Schlüssels abgefragt, nicht das Passwort. Auf dem Server haben `~/.ssh` die Rechte `700` und `authorized_keys` die Rechte `600`.
+**Profi:** `id_ed25519` ist der **private** Schlüssel (`-rw-------`, niemals weitergeben), `id_ed25519.pub` der **öffentliche** (`-rw-r--r--`). `ssh-copy-id` hängt den öffentlichen Schlüssel an `~/.ssh/authorized_keys` auf dem Server an. Bei der Anmeldung wird die Passphrase des Schlüssels abgefragt, nicht das Passwort. Auf dem Server haben `~/.ssh` die Rechte `700` und `authorized_keys` die Rechte `600`.
 
 Mit `g+w` an `authorized_keys` lehnt `sshd` den Schlüssel ab und fragt wieder nach dem Passwort. Im Journal steht `Authentication refused: bad ownership or modes for file …/authorized_keys`. Grund ist die Einstellung `StrictModes yes`: Wenn andere die Datei ändern könnten, könnten sie dort ihren eigenen Schlüssel eintragen.
 

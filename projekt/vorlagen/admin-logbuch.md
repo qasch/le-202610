@@ -1,6 +1,6 @@
-# Admin-Logbuch – Pinguin GmbH, Team <N>
+# Admin-Logbuch: Pinguin GmbH, Team <N>
 
-Server: `pinguin-team<N>` – IP-Adresse: `...`
+Server: `pinguin-team<N>`, IP-Adresse: `...`
 
 Team:
 
@@ -14,7 +14,7 @@ Team:
 
 ## Tag 1
 
-### Ticket T1-01 – Server in Betrieb nehmen
+### Ticket T1-01: Server in Betrieb nehmen
 
 **Kommandos:**
 

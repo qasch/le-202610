@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# testsystem-tag2.sh – baut ein nachgebautes Wurzelverzeichnis (etc/, home/,
+# testsystem-tag2.sh: baut ein nachgebautes Wurzelverzeichnis (etc/, home/,
 # srv/) zum Testen von check-tag2.sh ohne echten Server. Grundlage ist das
 # korrekt eingerichtete System von Tag 1 (testsystem-tag1.sh).
 #
@@ -103,7 +103,7 @@ fi
 datei /home/oweber/notizen.txt oweber oweber 664 "Passwort fürs Bankportal: steht im Tresor"
 ordner /home/oweber/belege oweber oweber 775
 datei /home/oweber/belege/beleg-001.txt oweber oweber 664 "Beleg 001: Büromaterial"
-datei /srv/firma/buchhaltung/jahresabschluss-2026.txt oweber buchhaltung 664 "Jahresabschluss 2026 – Entwurf"
+datei /srv/firma/buchhaltung/jahresabschluss-2026.txt oweber buchhaltung 664 "Jahresabschluss 2026 (Entwurf)"
 datei /srv/firma/austausch/abschied.txt oweber mitarbeitende 664 "Danke für alles! Kuchen am Freitag. Oskar"
 
 if [[ $kaputt == 1 ]]; then

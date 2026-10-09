@@ -1,4 +1,4 @@
-# T2-06 – Offboarding
+# T2-06: Offboarding
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Abschied von Oskar
@@ -8,7 +8,7 @@
 > leider verlässt uns Oskar Weber aus der Buchhaltung zum Monatsende. Bitte kümmert euch um sein Konto:
 >
 > - Peter Krause übernimmt seine Aufgaben und braucht dafür seine Dateien aus dem Buchhaltungsordner.
-> - Sein Heimatverzeichnis bitte **archivieren** – wer weiß, ob wir noch etwas daraus brauchen.
+> - Sein Heimatverzeichnis bitte **archivieren**, wer weiß, ob wir noch etwas daraus brauchen.
 > - Danach kann das Konto weg.
 >
 > Grete
@@ -17,7 +17,7 @@ Alle Schritte führt ihr **auf dem Server** aus.
 
 > **Hinweis:** Nach diesem Ticket meldet das Check-Skript von **Tag 1** das Konto `oweber` als fehlend. Das ist richtig so.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Oskar hinterlässt Spuren
 
@@ -27,7 +27,7 @@ Damit es etwas zu finden gibt, arbeitet Oskar noch ein letztes Mal. Öffnet eine
 echo "Passwort fürs Bankportal: steht im Tresor" > ~/notizen.txt
 mkdir ~/belege
 echo "Beleg 001: Büromaterial" > ~/belege/beleg-001.txt
-echo "Jahresabschluss 2026 – Entwurf" > /srv/firma/buchhaltung/jahresabschluss-2026.txt
+echo "Jahresabschluss 2026 (Entwurf)" > /srv/firma/buchhaltung/jahresabschluss-2026.txt
 echo "Danke für alles! Kuchen am Freitag. Oskar" > /srv/firma/austausch/abschied.txt
 exit
 ```
@@ -56,9 +56,9 @@ exit
 1. Notiert mit `id oweber` Oskars **UID**. Ihr braucht sie gleich.
 2. Löscht das Konto **mit** Heimatverzeichnis. Sucht in `man userdel` die passende Option.
 3. Prüft:
-   - `id oweber` – Was meldet das System?
-   - `ls /home` – Ist das Heimatverzeichnis weg?
-   - `grep oweber /etc/group` – Ist Oskar aus allen Gruppen verschwunden? Gibt es seine private Gruppe noch?
+   - `id oweber`: Was meldet das System?
+   - `ls /home`: Ist das Heimatverzeichnis weg?
+   - `grep oweber /etc/group`: Ist Oskar aus allen Gruppen verschwunden? Gibt es seine private Gruppe noch?
 
 ### Schritt 6: Was übrig bleibt
 
@@ -79,18 +79,18 @@ Führt das Check-Skript aus. Im Abschnitt **T2-06** sollten alle Punkte grün se
 - `jahresabschluss-2026.txt` gehört `pkrause:buchhaltung`.
 - Unter `/srv` gibt es keine Dateien ohne existierenden Besitzer.
 
-## ⭐⭐ Erweiterung: Das Archiv prüfen
+## Erweiterung: Das Archiv prüfen
 
 Eine Datensicherung ist erst etwas wert, wenn man sie wiederherstellen kann.
 
 1. Legt das Verzeichnis `/root/wiederherstellung` an und packt das Archiv dorthin aus. Sucht in `man tar` die Option, mit der man das Zielverzeichnis angibt.
 2. Lasst euch mit `sudo ls -lR /root/wiederherstellung` die ausgepackten Dateien anzeigen. Wer steht dort als Besitzer und Gruppe?
 3. Lasst euch dieselben Dateien mit `sudo ls -lnR /root/wiederherstellung` anzeigen. Was zeigt die Option `-n`? Vergleicht mit der UID, die ihr in Schritt 5 notiert habt.
-4. Erklärt im Logbuch: Was speichert `tar` im Archiv – den **Namen** oder die **Nummer** des Besitzers? (Erinnert euch an T1-03 ⭐⭐⭐.)
+4. Erklärt im Logbuch: Was speichert `tar` im Archiv, den **Namen** oder die **Nummer** des Besitzers? (Erinnert euch an T1-03 Profi.)
 
-Lasst das Verzeichnis `/root/wiederherstellung` für ⭐⭐⭐ stehen.
+Lasst das Verzeichnis `/root/wiederherstellung` für Profi stehen.
 
-## ⭐⭐⭐ Profi: Wenn eine UID wiederverwendet wird
+## Profi: Wenn eine UID wiederverwendet wird
 
 1. Legt ein Testkonto an, das **dieselbe UID** bekommt, die Oskar hatte:
 
@@ -109,18 +109,18 @@ Lasst das Verzeichnis `/root/wiederherstellung` für ⭐⭐⭐ stehen.
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - Dateien nach Besitzer suchen: `man find`, Suchbegriffe `-user` und `-nouser`
 - Besitzer ändern: `man chown`
-- Archive: `man tar` – Optionen zum Erstellen (`-c`), Auflisten (`-t`), Auspacken (`-x`), für `gzip` (`-z`), für den Archivnamen (`-f`) und für das Zielverzeichnis (`-C`)
+- Archive: `man tar`: Optionen zum Erstellen (`-c`), Auflisten (`-t`), Auspacken (`-x`), für `gzip` (`-z`), für den Archivnamen (`-f`) und für das Zielverzeichnis (`-C`)
 - Konten löschen: `man userdel`
 - Rechte von Ordnern: siehe T2-01 und T2-02
 
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 sudo find / -user oweber 2>/dev/null
@@ -140,7 +140,7 @@ ls -ln
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 ```bash
 # Schritt 2
@@ -171,17 +171,17 @@ sudo chown pkrause /srv/firma/austausch/abschied.txt
 sudo find / -nouser 2>/dev/null
 ```
 
-**Schritt 2:** Oskars Dateien liegen in `/home/oweber` (samt Unterverzeichnis `belege` und den Dateien aus `/etc/skel`), in `/srv/firma/buchhaltung` und in `/srv/firma/austausch`. Beim Suchen in `/` durchsucht `find` auch `/proc` – die Fehlermeldungen von dort verschwinden mit `2>/dev/null`.
+**Schritt 2:** Oskars Dateien liegen in `/home/oweber` (samt Unterverzeichnis `belege` und den Dateien aus `/etc/skel`), in `/srv/firma/buchhaltung` und in `/srv/firma/austausch`. Beim Suchen in `/` durchsucht `find` auch `/proc`. Die Fehlermeldungen von dort verschwinden mit `2>/dev/null`.
 
-**Schritt 3:** `chown` mit nur einem Benutzernamen ändert nur den Besitzer, die Gruppe bleibt `buchhaltung`. Besitzer ändern darf nur `root` – deshalb braucht ihr hier `sudo`, auch wenn die Datei im Ordner von Peters Abteilung liegt.
+**Schritt 3:** `chown` mit nur einem Benutzernamen ändert nur den Besitzer, die Gruppe bleibt `buchhaltung`. Besitzer ändern darf nur `root`, deshalb braucht ihr hier `sudo`, auch wenn die Datei im Ordner von Peters Abteilung liegt.
 
 **Schritt 4:** `tar` meldet `Removing leading '/' from member names` (sinngemäß auf Deutsch). Die Pfade werden im Archiv **relativ** gespeichert (`home/oweber/…`), damit beim Auspacken nicht versehentlich das echte `/home/oweber` überschrieben wird.
 
 **Schritt 5:** `id` meldet `no such user`. `userdel -r` löscht das Heimatverzeichnis und den Mail-Spool. Die Meldung, dass kein Mail-Spool gefunden wurde, ist harmlos. Oskar wird aus allen Gruppen ausgetragen, seine private Gruppe `oweber` wird gelöscht.
 
-**Schritt 6:** `ls -l` zeigt bei `abschied.txt` statt eines Namens eine **Zahl** – Oskars alte UID. Das Dateisystem speichert nur die Nummer. `ls` findet zu dieser Nummer keinen Eintrag mehr in `/etc/passwd` und zeigt deshalb die Zahl an. `find / -nouser` findet genau solche Dateien.
+**Schritt 6:** `ls -l` zeigt bei `abschied.txt` statt eines Namens eine **Zahl**: Oskars alte UID. Das Dateisystem speichert nur die Nummer. `ls` findet zu dieser Nummer keinen Eintrag mehr in `/etc/passwd` und zeigt deshalb die Zahl an. `find / -nouser` findet genau solche Dateien.
 
-**⭐⭐:**
+**Erweiterung:**
 
 ```bash
 sudo mkdir /root/wiederherstellung
@@ -190,14 +190,14 @@ sudo ls -lR /root/wiederherstellung
 sudo ls -lnR /root/wiederherstellung
 ```
 
-`root` stellt beim Auspacken die ursprünglichen Besitzer wieder her. Da es `oweber` nicht mehr gibt, erscheinen Zahlen. `-n` zeigt UID und GID immer als Zahlen. `tar` speichert zwar zusätzlich den Namen, beim Auspacken wird aber die passende Nummer auf **diesem** System verwendet – und gibt es den Namen nicht, die gespeicherte Nummer.
+`root` stellt beim Auspacken die ursprünglichen Besitzer wieder her. Da es `oweber` nicht mehr gibt, erscheinen Zahlen. `-n` zeigt UID und GID immer als Zahlen. `tar` speichert zwar zusätzlich den Namen, beim Auspacken wird aber die passende Nummer auf **diesem** System verwendet, und gibt es den Namen nicht, die gespeicherte Nummer.
 
-**⭐⭐⭐:** Mit `useradd -u <uid>` gehören `utest` plötzlich alle Dateien, die noch Oskars UID tragen – im ausgepackten Archiv und überall, wo `find -nouser` vorher etwas gefunden hätte. `useradd` vergibt standardmäßig die nächste UID **über** der höchsten bereits vergebenen. Oskars UID liegt in der Mitte – nach ihm wurde u. a. noch `mneumann` angelegt –, deshalb bekommt `vtest` eine neue, höhere UID. Wird aber das Konto mit der **höchsten** UID gelöscht, vergibt das nächste `useradd` genau diese Nummer sofort wieder.
+**Profi:** Mit `useradd -u <uid>` gehören `utest` plötzlich alle Dateien, die noch Oskars UID tragen, im ausgepackten Archiv und überall, wo `find -nouser` vorher etwas gefunden hätte. `useradd` vergibt standardmäßig die nächste UID **über** der höchsten bereits vergebenen. Oskars UID liegt in der Mitte (nach ihm wurde u. a. noch `mneumann` angelegt), deshalb bekommt `vtest` eine neue, höhere UID. Wird aber das Konto mit der **höchsten** UID gelöscht, vergibt das nächste `useradd` genau diese Nummer sofort wieder.
 
 Regeln für das Offboarding:
 
 1. **Vor** dem Löschen eines Kontos alle Dateien mit `find -user` suchen und übergeben oder archivieren.
-2. **Nach** dem Löschen mit `find -nouser` prüfen, dass nichts herrenlos zurückbleibt – bevor ein neues Konto angelegt wird.
+2. **Nach** dem Löschen mit `find -nouser` prüfen, dass nichts herrenlos zurückbleibt, bevor ein neues Konto angelegt wird.
 
 ```bash
 sudo userdel -r utest      # falls noch vorhanden

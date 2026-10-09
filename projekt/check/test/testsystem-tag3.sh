@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# testsystem-tag3.sh – baut ein nachgebautes Wurzelverzeichnis zum Testen von
+# testsystem-tag3.sh: baut ein nachgebautes Wurzelverzeichnis zum Testen von
 # check-tag3.sh ohne echten Server. Grundlage ist das korrekt eingerichtete
 # System von Tag 2 (testsystem-tag2.sh). Läuft wie dieses unter fakeroot:
 #
@@ -78,7 +78,7 @@ mkdir -p "$r/usr/local/sbin"
 skript="$r/usr/local/sbin/firma-backup"
 cat >"$skript" <<'EOF'
 #!/bin/bash
-# firma-backup – sichert die Firmenordner nach /srv/backup
+# firma-backup: sichert die Firmenordner nach /srv/backup
 
 QUELLE=/srv/firma
 ZIEL=/srv/backup

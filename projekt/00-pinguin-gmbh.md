@@ -1,6 +1,6 @@
 # Die Pinguin GmbH
 
-Die Pinguin GmbH ist ein kleines Softwarehaus mit Sitz am Südpol. Bisher lief alles über einen alten Windows-Rechner unter dem Schreibtisch der Geschäftsführung. Damit ist jetzt Schluss: Die Firma bekommt einen Linux-Server – und ihr seid die IT-Abteilung, die ihn einrichtet.
+Die Pinguin GmbH ist ein kleines Softwarehaus mit Sitz am Südpol. Bisher lief alles über einen alten Windows-Rechner unter dem Schreibtisch der Geschäftsführung. Damit ist jetzt Schluss: Die Firma bekommt einen Linux-Server, und ihr seid die IT-Abteilung, die ihn einrichtet.
 
 ## Abteilungen
 
@@ -40,4 +40,4 @@ Die Liste gibt es auch als Datei: [`daten/mitarbeitende.csv`](./daten/mitarbeite
 - Als Login-Shell wird die `bash` verwendet.
 - Im Kommentarfeld steht der vollständige Name der Person.
 - Administrative Aufgaben werden mit `sudo` erledigt, nicht in einer dauerhaft offenen Root-Shell.
-- Konten von Personen, die die Firma verlassen, werden **nicht** einfach gelöscht – ihre Daten könnten noch gebraucht werden.
+- Konten von Personen, die die Firma verlassen, werden **nicht** einfach gelöscht. Ihre Daten könnten noch gebraucht werden.

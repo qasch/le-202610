@@ -1,4 +1,4 @@
-# T2-05 – Verknüpfungen: Symlinks und Hardlinks
+# T2-05: Verknüpfungen: Symlinks und Hardlinks
 
 > **Von:** Nina Schulz (Entwicklung)
 > **Betreff:** Abkürzung gesucht
@@ -13,7 +13,7 @@
 
 Alle Schritte führt ihr **auf dem Server** aus.
 
-## ⭐ Pflicht: Eine Abkürzung für Nina
+## Pflicht: Eine Abkürzung für Nina
 
 ### Schritt 1: Symlink anlegen
 
@@ -42,7 +42,7 @@ Der Link hat die Rechte `rwxrwxrwx`. Darf jetzt jede Person über einen solchen 
 
    Klappt das Anlegen?
 2. Lena versucht, über den Link hineinzuschauen: `ls ~/spion/` (mit Schrägstrich am Ende).
-3. Notiert im Logbuch: Welche Rechte entscheiden über den Zugriff – die des Links oder die des Ziels?
+3. Notiert im Logbuch: Welche Rechte entscheiden über den Zugriff: die des Links oder die des Ziels?
 4. Lena löscht ihren Link wieder: `rm ~/spion` (**ohne** Schrägstrich am Ende).
 
 ### Schritt 4: Ein kaputter Link
@@ -67,7 +67,7 @@ Führt das Check-Skript aus. Im Abschnitt **T2-05** sollten alle Punkte grün se
 - Der Link gehört `nschulz`.
 - Lenas Link `spion` und Ninas Link `tippfehler` sind wieder gelöscht.
 
-## ⭐⭐ Erweiterung: Hardlinks – eine Datei, zwei Namen
+## Erweiterung: Hardlinks, eine Datei mit zwei Namen
 
 Tim hat recht. Das findet ihr jetzt heraus. Arbeitet mit eurem **eigenen** Admin-Konto in eurem Heimatverzeichnis.
 
@@ -117,9 +117,9 @@ ls -li original.txt hardlink.txt symlink.txt
 
 1. Führt `ls -ld /srv/firma` aus und notiert den Linkzähler.
 2. Zählt die Unterverzeichnisse von `/srv/firma`.
-3. Findet eine Regel: Wie hängt der Linkzähler eines Verzeichnisses mit der Zahl seiner Unterverzeichnisse zusammen? Tipp: `ls -la /srv/firma/vertrieb` – was bedeuten die Einträge `.` und `..`?
+3. Findet eine Regel: Wie hängt der Linkzähler eines Verzeichnisses mit der Zahl seiner Unterverzeichnisse zusammen? Tipp: `ls -la /srv/firma/vertrieb`. Was bedeuten die Einträge `.` und `..`?
 
-## ⭐⭐⭐ Profi: Grenzen von Hardlinks
+## Profi: Grenzen von Hardlinks
 
 Arbeitet weiter mit eurem eigenen Admin-Konto.
 
@@ -142,9 +142,9 @@ Arbeitet weiter mit eurem eigenen Admin-Konto.
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
-- Links anlegen: `man ln` – ohne Option entsteht ein Hardlink, mit `-s` ein symbolischer Link.
+- Links anlegen: `man ln`. Ohne Option entsteht ein Hardlink, mit `-s` ein symbolischer Link.
 - Inode-Nummern anzeigen: `man ls`, Option `-i`
 - Den echten Pfad anzeigen: `help pwd` (Option `-P`), `man readlink`
 - Ein **Hardlink** ist ein zusätzlicher Name für dieselbe Inode. Ein **Symlink** ist eine eigene kleine Datei, in der ein Pfad steht.
@@ -152,7 +152,7 @@ Arbeitet weiter mit eurem eigenen Admin-Konto.
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 ln -s <ziel> <linkname>
@@ -169,10 +169,10 @@ find /usr/bin -type l
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 ```bash
-# ⭐ (als nschulz)
+# Pflicht (als nschulz)
 ln -s /srv/firma/entwicklung ~/abteilung
 ls -l ~                  # lrwxrwxrwx … abteilung -> /srv/firma/entwicklung
 cd ~/abteilung
@@ -194,11 +194,11 @@ rm ~/tippfehler
 
 **Schritt 2:** `pwd` zeigt den Weg, über den ihr gekommen seid, `pwd -P` das tatsächliche (*physische*) Verzeichnis. Die Datei landet in `/srv/firma/entwicklung` und gehört wegen des SGID-Bits der Gruppe `entwicklung`.
 
-**Schritt 3:** Einen Link darf jede Person anlegen, auf jedes Ziel. Die Rechte eines Symlinks (`rwxrwxrwx`) spielen keine Rolle – entscheidend sind immer die Rechte des **Ziels**. Lena bleibt draußen. `rm ~/spion/` mit Schrägstrich würde sich auf das Ziel beziehen – deshalb ohne.
+**Schritt 3:** Einen Link darf jede Person anlegen, auf jedes Ziel. Die Rechte eines Symlinks (`rwxrwxrwx`) spielen keine Rolle, entscheidend sind immer die Rechte des **Ziels**. Lena bleibt draußen. `rm ~/spion/` mit Schrägstrich würde sich auf das Ziel beziehen, deshalb ohne.
 
 **Schritt 4:** `ln -s` prüft nicht, ob das Ziel existiert. `ls` zeigt den kaputten Link (je nach Farbschema rot) an, `cd` meldet `No such file or directory`.
 
-**⭐⭐:**
+**Erweiterung:**
 
 | Name | Inode | Typ | Linkzähler | Größe |
 |---|---|---|---|---|
@@ -206,7 +206,7 @@ rm ~/tippfehler
 | `hardlink.txt` | dieselbe | `-` | 2 | 10 |
 | `symlink.txt` | eine andere | `l` | 1 | 12 |
 
-`original.txt` und `hardlink.txt` sind **zwei Namen für dieselbe Datei** (dieselbe Inode). Deshalb sieht man jede Änderung des Inhalts und der Rechte unter beiden Namen. Es gibt kein „Original“ mehr – beide Namen sind gleichberechtigt. `symlink.txt` speichert nur den Pfad `original.txt` (12 Zeichen).
+`original.txt` und `hardlink.txt` sind **zwei Namen für dieselbe Datei** (dieselbe Inode). Deshalb sieht man jede Änderung des Inhalts und der Rechte unter beiden Namen. Es gibt kein „Original“ mehr, beide Namen sind gleichberechtigt. `symlink.txt` speichert nur den Pfad `original.txt` (12 Zeichen).
 
 Nach dem Löschen von `original.txt` sinkt der Linkzähler von `hardlink.txt` auf 1, der Inhalt ist weiterhin da. `symlink.txt` zeigt ins Leere.
 
@@ -215,10 +215,10 @@ Nach dem Löschen von `original.txt` sinkt der Linkzähler von `hardlink.txt` au
 | Was ist es? | eigene Datei, die einen Pfad enthält | zusätzlicher Name für dieselbe Inode |
 | Eigene Inode? | ja | nein |
 | Original gelöscht | Link zeigt ins Leere | Inhalt bleibt erreichbar |
-| Wirklich gelöscht | – | wenn der Linkzähler 0 ist und kein Programm die Datei mehr geöffnet hat |
+| Wirklich gelöscht | - | wenn der Linkzähler 0 ist und kein Programm die Datei mehr geöffnet hat |
 
 **Linkzähler von Verzeichnissen:** 2 + Anzahl der Unterverzeichnisse. Jedes Verzeichnis wird über seinen Namen im übergeordneten Verzeichnis und über den eigenen Eintrag `.` gezählt, dazu kommt der Eintrag `..` jedes Unterverzeichnisses. `/srv/firma` mit fünf Unterverzeichnissen hat also den Linkzähler 7.
 
-**⭐⭐⭐:** Hardlinks auf Verzeichnisse sind verboten (`hard link not allowed for directory`), weil sonst Schleifen im Verzeichnisbaum entstehen könnten. `/dev/shm` ist ein eigenes Dateisystem im Arbeitsspeicher (`tmpfs`). Eine Inode-Nummer gilt nur innerhalb **eines** Dateisystems, deshalb meldet `ln` `Invalid cross-device link`. Symlinks speichern nur einen Pfad und funktionieren daher auch über Dateisystemgrenzen hinweg. Auf aktuellen Debian-Versionen sind `/bin`, `/sbin` und `/lib` Symlinks in das Verzeichnis `/usr` (*usrmerge*). `vi` führt über mehrere Symlinks (u. a. `/etc/alternatives/vi`) zum tatsächlich installierten Editor.
+**Profi:** Hardlinks auf Verzeichnisse sind verboten (`hard link not allowed for directory`), weil sonst Schleifen im Verzeichnisbaum entstehen könnten. `/dev/shm` ist ein eigenes Dateisystem im Arbeitsspeicher (`tmpfs`). Eine Inode-Nummer gilt nur innerhalb **eines** Dateisystems, deshalb meldet `ln` `Invalid cross-device link`. Symlinks speichern nur einen Pfad und funktionieren daher auch über Dateisystemgrenzen hinweg. Auf aktuellen Debian-Versionen sind `/bin`, `/sbin` und `/lib` Symlinks in das Verzeichnis `/usr` (*usrmerge*). `vi` führt über mehrere Symlinks (u. a. `/etc/alternatives/vi`) zum tatsächlich installierten Editor.
 
 </details>

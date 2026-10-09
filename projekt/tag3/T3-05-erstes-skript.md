@@ -1,19 +1,19 @@
-# T3-05 – Das erste Skript
+# T3-05: Das erste Skript
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Jeden Tag dasselbe?
 >
 > Hallo IT,
 >
-> super, dass die Sicherung funktioniert! Aber ehrlich: Muss jeden Abend jemand von euch dieses lange Kommando abtippen? Und was, wenn ihr euch vertippt? Geht das nicht einfacher – auf Knopfdruck?
+> super, dass die Sicherung funktioniert! Aber ehrlich: Muss jeden Abend jemand von euch dieses lange Kommando abtippen? Und was, wenn ihr euch vertippt? Geht das nicht einfacher, auf Knopfdruck?
 >
 > Grete
 
-Ein **Shell-Skript** ist eine Textdatei mit Kommandos, die die Shell nacheinander ausführt – genau die Kommandos, die ihr sonst von Hand eintippen würdet. Ihr macht aus der Sicherung von T3-04 ein Skript.
+Ein **Shell-Skript** ist eine Textdatei mit Kommandos, die die Shell nacheinander ausführt, genau die Kommandos, die ihr sonst von Hand eintippen würdet. Ihr macht aus der Sicherung von T3-04 ein Skript.
 
 Alle Schritte führt ihr **auf dem Server** aus.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Das Kommando wiederfinden
 
@@ -26,7 +26,7 @@ Alle Schritte führt ihr **auf dem Server** aus.
 
    ```bash
    #!/bin/bash
-   # firma-backup – sichert die Firmenordner nach /srv/backup
+   # firma-backup: sichert die Firmenordner nach /srv/backup
    # Aufruf: sudo firma-backup
 
    echo "Sicherung von /srv/firma startet ..."
@@ -54,13 +54,13 @@ Alle Schritte führt ihr **auf dem Server** aus.
 
 ### Schritt 5: Für alle Admins verfügbar machen
 
-Das Skript liegt in **eurem** Heimatverzeichnis – die anderen Admins kommen nicht dran, und man muss den Pfad mit `./` angeben.
+Das Skript liegt in **eurem** Heimatverzeichnis. Die anderen Admins kommen nicht dran, und man muss den Pfad mit `./` angeben.
 
 1. Lasst euch mit `echo $PATH` anzeigen, in welchen Verzeichnissen die Shell nach Programmen sucht. Notiert sie.
 2. Lasst euch anzeigen, welchen Suchpfad `sudo` verwendet: `sudo sh -c 'echo $PATH'`. Welches Verzeichnis ist für eigene Admin-Programme gedacht? (Tipp: `local` und `sbin`)
 3. Kopiert das Skript nach `/usr/local/sbin/firma-backup`.
 4. Sorgt dafür, dass es `root` gehört und **nur** `root` es ändern darf: Rechte `755` (`rwxr-xr-x`).
-5. Startet es von einem beliebigen Verzeichnis aus mit `sudo firma-backup` – ohne Pfad.
+5. Startet es von einem beliebigen Verzeichnis aus mit `sudo firma-backup`, ohne Pfad.
 6. Prüft mit `which firma-backup`, wo die Shell das Programm findet. Klappt das auch als normales Konto? Warum?
 
 ### Schritt 6: Warum darf nur `root` das Skript ändern?
@@ -77,7 +77,7 @@ Führt das Check-Skript aus. Im Abschnitt **T3-05** sollten alle Punkte grün se
 - Die erste Zeile des Skripts ist `#!/bin/bash`.
 - Das Skript erzeugt eine Sicherung in `/srv/backup` (siehe T3-04).
 
-## ⭐⭐ Erweiterung: Variablen und Rückgabewerte
+## Erweiterung: Variablen und Rückgabewerte
 
 ### Variablen
 
@@ -101,12 +101,12 @@ Jedes Kommando liefert beim Beenden einen **Rückgabewert** (*Exit Status*): `0`
 
 1. Probiert es aus: `ls /srv` und danach `echo $?`. Dann `ls /gibtsnicht` und `echo $?`.
 2. Startet euer Skript **ohne** `sudo` und lasst euch direkt danach `$?` anzeigen. Liefert das Skript einen Fehler?
-3. Hängt testweise als **letzte** Zeile `echo "Ende."` an das Skript an. Startet es wieder ohne `sudo` und prüft `$?`. Was hat sich geändert – obwohl `tar` genauso scheitert wie vorher?
+3. Hängt testweise als **letzte** Zeile `echo "Ende."` an das Skript an. Startet es wieder ohne `sudo` und prüft `$?`. Was hat sich geändert, obwohl `tar` genauso scheitert wie vorher?
 4. Ein Skript liefert den Rückgabewert seines **letzten** Kommandos. Erklärt damit das Ergebnis von Punkt 2 und 3. Entfernt die Zeile `echo "Ende."` wieder.
 
 Kopiert die neue Fassung nach `/usr/local/sbin/firma-backup` und prüft die Rechte erneut.
 
-## ⭐⭐⭐ Profi: Bedingungen, Schleifen und Argumente
+## Profi: Bedingungen, Schleifen und Argumente
 
 1. Baut nach dem `tar`-Aufruf eine Prüfung ein, die eine verständliche Meldung ausgibt und das Skript mit einem Fehler beendet, wenn `tar` gescheitert ist:
 
@@ -137,7 +137,7 @@ Kopiert die neue Fassung nach `/usr/local/sbin/firma-backup` und prüft die Rech
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - Ein Skript braucht das `x`-Recht, um mit `./name` gestartet zu werden. Alternativ: `bash name` (dann reicht `r`).
 - Die erste Zeile `#!/bin/bash` sagt dem System, welches Programm das Skript ausführen soll.
@@ -150,7 +150,7 @@ Kopiert die neue Fassung nach `/usr/local/sbin/firma-backup` und prüft die Rech
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 history | grep tar
@@ -170,25 +170,25 @@ echo $?
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
-**Schritt 1:** Die History liegt in `~/.bash_history` – jedes Konto hat seine eigene. Kommandos, die jemand anderes eingegeben hat, stehen nur in dessen History.
+**Schritt 1:** Die History liegt in `~/.bash_history`, jedes Konto hat seine eigene. Kommandos, die jemand anderes eingegeben hat, stehen nur in dessen History.
 
-**Schritt 2:** Der Shebang `#!/bin/bash` legt fest, dass `/bin/bash` das Skript ausführt. Zeilen mit `#` sind Kommentare. Im Skript steht kein `sudo`, weil das ganze Skript mit `sudo` gestartet wird – alle Kommandos darin laufen dann als `root`.
+**Schritt 2:** Der Shebang `#!/bin/bash` legt fest, dass `/bin/bash` das Skript ausführt. Zeilen mit `#` sind Kommentare. Im Skript steht kein `sudo`, weil das ganze Skript mit `sudo` gestartet wird. Alle Kommandos darin laufen dann als `root`.
 
 **Schritt 3:**
 
 ```bash
-./firma-backup               # Permission denied – kein x-Recht
+./firma-backup               # Permission denied: kein x-Recht
 ls -l ~/firma-backup         # -rw-rw-r--
 chmod u+x ~/firma-backup
 ./firma-backup               # läuft, aber tar: … Permission denied
 sudo ./firma-backup          # klappt
 ```
 
-Das Skript braucht zwei Arten von Rechten: das `x`-Recht an der **Skriptdatei**, um es zu starten, und die Rechte für alles, was die **Kommandos darin** tun – hier Lesen in allen Abteilungsordnern und Schreiben in `/srv/backup`. Das hat nur `root`.
+Das Skript braucht zwei Arten von Rechten: das `x`-Recht an der **Skriptdatei**, um es zu starten, und die Rechte für alles, was die **Kommandos darin** tun, hier Lesen in allen Abteilungsordnern und Schreiben in `/srv/backup`. Das hat nur `root`.
 
-**Schritt 4:** Es gibt nur **eine** Sicherung von heute – der zweite Aufruf hat sie unter demselben Namen überschrieben. Ein Problem, wenn zwischen den Aufrufen etwas kaputtgegangen ist: Dann ist die gute Sicherung weg.
+**Schritt 4:** Es gibt nur **eine** Sicherung von heute. Der zweite Aufruf hat sie unter demselben Namen überschrieben. Ein Problem, wenn zwischen den Aufrufen etwas kaputtgegangen ist: Dann ist die gute Sicherung weg.
 
 **Schritt 5:**
 
@@ -202,15 +202,15 @@ cd /tmp && sudo firma-backup
 which firma-backup
 ```
 
-`/usr/local/sbin` ist für Admin-Programme gedacht, die nicht aus einem Paket stammen. `sudo` sucht dort immer (`secure_path`). Ob `which firma-backup` als normales Konto etwas findet, hängt davon ab, ob `/usr/local/sbin` im `PATH` des Kontos steht – auf Debian ist das bei normalen Konten meist **nicht** der Fall, bei `root` schon.
+`/usr/local/sbin` ist für Admin-Programme gedacht, die nicht aus einem Paket stammen. `sudo` sucht dort immer (`secure_path`). Ob `which firma-backup` als normales Konto etwas findet, hängt davon ab, ob `/usr/local/sbin` im `PATH` des Kontos steht. Auf Debian ist das bei normalen Konten meist **nicht** der Fall, bei `root` schon.
 
-**Schritt 6:** Das Skript läuft mit `sudo`, also als `root`. Wer es ändern kann, kann beliebige Kommandos hineinschreiben, die beim nächsten Aufruf mit Root-Rechten laufen – zum Beispiel sich selbst in die Gruppe `sudo` aufnehmen. Ein für andere beschreibbares Skript, das `root` ausführt, ist eine Hintertür.
+**Schritt 6:** Das Skript läuft mit `sudo`, also als `root`. Wer es ändern kann, kann beliebige Kommandos hineinschreiben, die beim nächsten Aufruf mit Root-Rechten laufen, zum Beispiel sich selbst in die Gruppe `sudo` aufnehmen. Ein für andere beschreibbares Skript, das `root` ausführt, ist eine Hintertür.
 
-**⭐⭐:**
+**Erweiterung:**
 
 ```bash
 #!/bin/bash
-# firma-backup – sichert die Firmenordner nach /srv/backup
+# firma-backup: sichert die Firmenordner nach /srv/backup
 # Aufruf: sudo firma-backup
 
 QUELLE=/srv/firma
@@ -225,13 +225,13 @@ ls -lh "$DATEI"
 
 `QUELLE = /srv/firma` versucht, ein Kommando namens `QUELLE` mit den Argumenten `=` und `/srv/firma` zu starten: `QUELLE: command not found`. Mit Stunde und Minute im Namen überschreibt ein zweiter Aufruf am selben Tag die erste Sicherung nicht mehr.
 
-`ls /srv` → `$?` ist `0`, `ls /gibtsnicht` → `2`. Ohne `sudo` scheitert `tar` – und zufällig scheitert auch das letzte Kommando `ls -lh "$DATEI"` (kein Zugriff auf `/srv/backup`), deshalb ist `$?` nicht `0`. Mit `echo "Ende."` am Schluss ist `$?` dagegen `0`, weil `echo` immer klappt: Das Skript meldet Erfolg, obwohl die Sicherung fehlt. Deshalb prüft man den Rückgabewert direkt nach dem wichtigen Kommando (⭐⭐⭐).
+Nach `ls /srv` ist `$?` gleich `0`, nach `ls /gibtsnicht` gleich `2`. Ohne `sudo` scheitert `tar`, und zufällig scheitert auch das letzte Kommando `ls -lh "$DATEI"` (kein Zugriff auf `/srv/backup`), deshalb ist `$?` nicht `0`. Mit `echo "Ende."` am Schluss ist `$?` dagegen `0`, weil `echo` immer klappt: Das Skript meldet Erfolg, obwohl die Sicherung fehlt. Deshalb prüft man den Rückgabewert direkt nach dem wichtigen Kommando (Profi).
 
-**⭐⭐⭐:** `>&2` leitet die Meldung auf die Standardfehlerausgabe um, wo Fehlermeldungen hingehören. Mit `exit 1` liefert das Skript einen Fehler, den z. B. ein anderes Skript prüfen kann.
+**Profi:** `>&2` leitet die Meldung auf die Standardfehlerausgabe um, wo Fehlermeldungen hingehören. Mit `exit 1` liefert das Skript einen Fehler, den z. B. ein anderes Skript prüfen kann.
 
 ```bash
 #!/bin/bash
-# log-bericht – wertet ein SSH-Anmeldeprotokoll aus
+# log-bericht: wertet ein SSH-Anmeldeprotokoll aus
 # Aufruf: ./log-bericht <logdatei>
 
 if [ -z "$1" ]; then

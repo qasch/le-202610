@@ -1,4 +1,4 @@
-# T1-06 – Erster Arbeitstag
+# T1-06: Erster Arbeitstag
 
 > **Von:** Lena Wagner (Vertrieb)
 > **Betreff:** Mein Login
@@ -17,7 +17,7 @@ Jetzt testet ihr euer Werk aus Sicht der Mitarbeitenden. Verteilt dafür die Rol
 | **Admin** | am eigenen Arbeitsplatz, per SSH mit dem persönlichen Konto am Server | beobachtet, was Lena tut |
 | **Logbuch** | neben dem Admin | notiert alle Beobachtungen |
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Erste Anmeldung (Lena)
 
@@ -29,7 +29,7 @@ Jetzt testet ihr euer Werk aus Sicht der Mitarbeitenden. Verteilt dafür die Rol
 ### Schritt 2: Umschauen (Lena)
 
 1. Wo seid ihr nach der Anmeldung? Prüft mit `pwd`.
-2. Lasst euch mit `ls -la` den Inhalt des Heimatverzeichnisses anzeigen. Gibt es die Datei `WILLKOMMEN.txt` (falls ihr T1-03 ⭐⭐ gemacht habt)? Lest sie mit `cat`.
+2. Lasst euch mit `ls -la` den Inhalt des Heimatverzeichnisses anzeigen. Gibt es die Datei `WILLKOMMEN.txt` (falls ihr T1-03 Erweiterung gemacht habt)? Lest sie mit `cat`.
 3. Führt `id` aus. Notiert alle Gruppen und vergleicht sie mit der Firmenbeschreibung: Ist Lena in den richtigen Abteilungen?
 
 ### Schritt 3: `sudo` ausprobieren (Lena)
@@ -49,7 +49,7 @@ Jetzt testet ihr euer Werk aus Sicht der Mitarbeitenden. Verteilt dafür die Rol
 
 ### Schritt 5: Den `sudo`-Versuch finden (Admin)
 
-Jeder Aufruf von `sudo` wird im Journal des Systems protokolliert – auch verweigerte.
+Jeder Aufruf von `sudo` wird im Journal des Systems protokolliert, auch verweigerte.
 
 1. Lasst euch mit `journalctl` die Einträge des Programms `sudo` anzeigen (siehe Hilfekarte 2). Ihr braucht dafür selbst `sudo`.
 2. Sucht den Eintrag zu Lenas Versuch und notiert Uhrzeit, Benutzername und die Meldung.
@@ -61,7 +61,7 @@ Jeder Aufruf von `sudo` wird im Journal des Systems protokolliert – auch verwe
 2. Der Admin führt `who` erneut aus. Ist Lena noch zu sehen?
 3. Der Admin führt `last lwagner` aus. Wie viele Anmeldungen von Lena seht ihr heute, und wie lange dauerten sie?
 
-## ⭐⭐ Erweiterung: Was darf Lena sehen?
+## Erweiterung: Was darf Lena sehen?
 
 Lena meldet sich erneut an.
 
@@ -71,9 +71,9 @@ Lena meldet sich erneut an.
    - `ls -la /home/jbecker`
    - `cat /home/jbecker/.bashrc`
 4. Notiert, was klappt und was nicht.
-5. Diskutiert im Team und haltet eure Meinung im Logbuch fest: Sollte eine Mitarbeiterin aus dem Vertrieb die Dateien eines Entwicklers sehen können? **Morgen schauen wir uns an, warum Lena nicht hineinkommt – und wie man trotzdem Dateien teilt.**
+5. Diskutiert im Team und haltet eure Meinung im Logbuch fest: Sollte eine Mitarbeiterin aus dem Vertrieb die Dateien eines Entwicklers sehen können? **Morgen schauen wir uns an, warum Lena nicht hineinkommt und wie man trotzdem Dateien teilt.**
 
-## ⭐⭐⭐ Profi
+## Profi
 
 ### Login-Shell selbst ändern (Lena)
 
@@ -95,16 +95,16 @@ Lena meldet sich erneut an.
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - Angemeldete Benutzer: `man who`, `man w`, `man last`
-- Das Journal: `man journalctl` – sucht nach einer Möglichkeit, nach einem Programm (*command*) zu filtern.
+- Das Journal: `man journalctl`. Sucht nach einer Möglichkeit, nach einem Programm (*command*) zu filtern.
 - Login-Shell ändern: `man chsh`, erlaubte Shells in `man shells`
 
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 ssh lwagner@pinguin-team<N>
@@ -122,13 +122,13 @@ sudo su - lwagner
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 **Schritt 1:** Nach der Anmeldung mit dem Startpasswort meldet das System `You are required to change your password immediately (administrator enforced)`. Nach der Änderung wird die Verbindung getrennt (`Connection to … closed`), und Lena meldet sich mit dem neuen Passwort erneut an.
 
 **Schritt 2:** Lena landet in `/home/lwagner`. `id` zeigt die primäre Gruppe `lwagner` sowie `vertrieb` und `mitarbeitende`.
 
-**Schritt 3:** `lwagner is not in the sudoers file.` (je nach Version auch `lwagner is not allowed to run sudo on pinguin-team<N>.`) – Lena ist nicht Mitglied der Gruppe `sudo` und darf keine Kommandos mit Root-Rechten ausführen. Genau so soll es sein.
+**Schritt 3:** `lwagner is not in the sudoers file.` (je nach Version auch `lwagner is not allowed to run sudo on pinguin-team<N>.`). Lena ist nicht Mitglied der Gruppe `sudo` und darf keine Kommandos mit Root-Rechten ausführen. Genau so soll es sein.
 
 **Schritt 4:**
 
@@ -137,7 +137,7 @@ who
 w
 ```
 
-`who` zeigt Benutzer, Terminal, Anmeldezeit und Herkunfts-IP. `w` zeigt zusätzlich in der Spalte `WHAT`, welches Programm gerade läuft – hier `nano notizen.txt`.
+`who` zeigt Benutzer, Terminal, Anmeldezeit und Herkunfts-IP. `w` zeigt zusätzlich in der Spalte `WHAT`, welches Programm gerade läuft, hier `nano notizen.txt`.
 
 **Schritt 5:**
 
@@ -146,14 +146,14 @@ sudo journalctl _COMM=sudo
 sudo journalctl _COMM=sudo | grep lwagner
 ```
 
-Dort steht u. a. `lwagner : user NOT in sudoers ; … COMMAND=/usr/bin/whoami`. Eure eigenen Aufrufe erscheinen ebenfalls – mit Benutzername, Arbeitsverzeichnis und ausgeführtem Kommando.
+Dort steht u. a. `lwagner : user NOT in sudoers ; … COMMAND=/usr/bin/whoami`. Eure eigenen Aufrufe erscheinen ebenfalls, mit Benutzername, Arbeitsverzeichnis und ausgeführtem Kommando.
 
 **Schritt 6:** `last lwagner` zeigt jede Anmeldung mit Start- und Endzeit sowie Dauer. Die erste Sitzung (Passwortänderung) dauerte nur wenige Sekunden.
 
-**⭐⭐:** `/etc/shadow` ist nur für `root` und die Gruppe `shadow` lesbar (`-rw-r-----`). Lena kommt nicht in `/home/jbecker`: `ls -ld /home/*` zeigt bei allen Heimatverzeichnissen `drwx------` – nur die Besitzerin oder der Besitzer darf hinein. Warum das so ist und wie man trotzdem Dateien teilt, ist Thema von Tag 2.
+**Erweiterung:** `/etc/shadow` ist nur für `root` und die Gruppe `shadow` lesbar (`-rw-r-----`). Lena kommt nicht in `/home/jbecker`: `ls -ld /home/*` zeigt bei allen Heimatverzeichnissen `drwx------`: Nur die Besitzerin oder der Besitzer darf hinein. Warum das so ist und wie man trotzdem Dateien teilt, ist Thema von Tag 2.
 
-**⭐⭐⭐ Login-Shell:** Mit `chsh -s /bin/sh` darf jede Person die eigene Login-Shell ändern; abgefragt wird ihr **eigenes** Passwort. Erlaubt sind nur Shells, die in `/etc/shells` stehen – `/bin/ls` wird abgelehnt. In der `sh` funktionieren u. a. Pfeiltasten und Tab-Vervollständigung nicht wie gewohnt, `echo $0` zeigt `-sh`. Zurückstellen mit `chsh -s /bin/bash`.
+**Profi Login-Shell:** Mit `chsh -s /bin/sh` darf jede Person die eigene Login-Shell ändern; abgefragt wird ihr **eigenes** Passwort. Erlaubt sind nur Shells, die in `/etc/shells` stehen, `/bin/ls` wird abgelehnt. In der `sh` funktionieren u. a. Pfeiltasten und Tab-Vervollständigung nicht wie gewohnt, `echo $0` zeigt `-sh`. Zurückstellen mit `chsh -s /bin/bash`.
 
-**⭐⭐⭐ Vertraulichkeit:** `root` darf ohne Passwort in jedes Konto wechseln und alle Dateien lesen. Vertrauliche Daten sind vor Admins nur durch Verschlüsselung geschützt – und durch Vertrauen. Dass jeder `sudo`-Aufruf mit Benutzername protokolliert wird, sorgt zumindest für Nachvollziehbarkeit.
+**Profi Vertraulichkeit:** `root` darf ohne Passwort in jedes Konto wechseln und alle Dateien lesen. Vertrauliche Daten sind vor Admins nur durch Verschlüsselung geschützt und durch Vertrauen. Dass jeder `sudo`-Aufruf mit Benutzername protokolliert wird, sorgt zumindest für Nachvollziehbarkeit.
 
 </details>

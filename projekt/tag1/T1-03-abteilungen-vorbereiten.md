@@ -1,4 +1,4 @@
-# T1-03 – Abteilungen vorbereiten
+# T1-03: Abteilungen vorbereiten
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Abteilungen
@@ -13,7 +13,7 @@
 
 Alle Schritte führt ihr **auf dem Server** mit `sudo` aus.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Gruppen anlegen
 
@@ -34,7 +34,7 @@ Führt das Check-Skript aus. Im Abschnitt **T1-03** sollten alle fünf Gruppen g
 
 Die Gruppen `geschaeftsfuehrung`, `vertrieb`, `entwicklung`, `buchhaltung` und `mitarbeitende` existieren.
 
-## ⭐⭐ Erweiterung: Begrüßung für neue Konten
+## Erweiterung: Begrüßung für neue Konten
 
 > **Wichtig:** Diese Aufgabe muss **vor** T1-04 erledigt werden, sonst wirkt sie bei den Mitarbeitenden nicht.
 
@@ -61,7 +61,7 @@ Neue Heimatverzeichnisse werden als Kopie einer Vorlage angelegt. Diese Vorlage 
 1. Hängt an das Ende der Datei `/etc/skel/.bashrc` die Zeile `alias ll='ls -l'` an.
 2. Versucht es zuerst mit `sudo echo "alias ll='ls -l'" >> /etc/skel/.bashrc`. Notiert die Fehlermeldung und erklärt, warum das nicht funktioniert.
 3. Nutzt stattdessen einen Editor oder das Kommando `tee` (siehe Hilfekarte 2).
-4. Prüft mit `tail -n 3 /etc/skel/.bashrc`, ob die Zeile angekommen ist – und zwar **genau einmal**.
+4. Prüft mit `tail -n 3 /etc/skel/.bashrc`, ob die Zeile angekommen ist, und zwar **genau einmal**.
 
 ### Schritt 4: Testen
 
@@ -71,7 +71,7 @@ Neue Heimatverzeichnisse werden als Kopie einer Vorlage angelegt. Diese Vorlage 
 4. Löscht das Testkonto wieder: `sudo userdel -r skeltest`
 5. Schaut in **euer eigenes** Heimatverzeichnis. Habt ihr die Datei `WILLKOMMEN.txt` auch bekommen? Erklärt im Logbuch, warum (nicht).
 
-## ⭐⭐⭐ Profi: Feste GIDs
+## Profi: Feste GIDs
 
 Die Pinguin GmbH plant einen zweiten Server. Dort sollen die Gruppen dieselben GIDs haben.
 
@@ -93,7 +93,7 @@ Die Pinguin GmbH plant einen zweiten Server. Dort sollen die Gruppen dieselben G
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - Gruppen anlegen und ändern: `man groupadd`, `man groupmod`
 - Gruppen werden in `/etc/group` und `/etc/gshadow` gespeichert.
@@ -103,7 +103,7 @@ Die Pinguin GmbH plant einen zweiten Server. Dort sollen die Gruppen dieselben G
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 groupadd <gruppe>
@@ -118,10 +118,10 @@ echo "alias ll='ls -l'" | sudo tee -a /etc/skel/.bashrc
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 ```bash
-# ⭐ Gruppen anlegen
+# Pflicht Gruppen anlegen
 sudo groupadd geschaeftsfuehrung
 sudo groupadd vertrieb
 sudo groupadd entwicklung
@@ -135,7 +135,7 @@ sudo tail -n 5 /etc/gshadow
 Die GIDs werden fortlaufend ab der nächsten freien Nummer vergeben. In `/etc/gshadow` steht im zweiten Feld ein `!`: Die Gruppe hat kein Gruppenpasswort (Gruppenpasswörter werden praktisch nicht genutzt).
 
 ```bash
-# ⭐⭐ Skeleton-Verzeichnis
+# Erweiterung Skeleton-Verzeichnis
 ls -la /etc/skel
 sudo nano /etc/skel/WILLKOMMEN.txt
 echo "alias ll='ls -l'" | sudo tee -a /etc/skel/.bashrc
@@ -147,12 +147,12 @@ sudo grep ll /home/skeltest/.bashrc
 sudo userdel -r skeltest
 ```
 
-**Warum scheitert `sudo echo … >> datei`?** Der Redirect `>>` wird von **eurer** Shell ausgeführt, bevor `sudo` überhaupt startet – und eure Shell läuft ohne Root-Rechte. `sudo` gilt nur für `echo`. `tee -a` dagegen läuft selbst mit `sudo` und schreibt die Datei mit Root-Rechten.
+**Warum scheitert `sudo echo … >> datei`?** Der Redirect `>>` wird von **eurer** Shell ausgeführt, bevor `sudo` überhaupt startet, und eure Shell läuft ohne Root-Rechte. `sudo` gilt nur für `echo`. `tee -a` dagegen läuft selbst mit `sudo` und schreibt die Datei mit Root-Rechten.
 
 **Warum habt ihr die Datei nicht bekommen?** Der Inhalt von `/etc/skel` wird nur beim **Anlegen** eines Kontos kopiert. Bestehende Konten bekommen ihn nicht automatisch; man müsste die Datei von Hand kopieren und mit `chown` dem jeweiligen Benutzer übergeben.
 
 ```bash
-# ⭐⭐⭐ Feste GIDs
+# Profi Feste GIDs
 sudo groupmod -g 2000 mitarbeitende
 sudo groupmod -g 2001 geschaeftsfuehrung
 sudo groupmod -g 2002 vertrieb
@@ -161,6 +161,6 @@ sudo groupmod -g 2004 buchhaltung
 tail -n 5 /etc/group
 ```
 
-Dateisysteme, Archive und Netzlaufwerke speichern nicht den Gruppennamen, sondern die **GID**. `ls -l` übersetzt die Nummer nur für die Anzeige in einen Namen. Hat die Gruppe `vertrieb` auf dem zweiten Server eine andere GID, gehören die Dateien dort plötzlich einer anderen Gruppe – oder gar keiner.
+Dateisysteme, Archive und Netzlaufwerke speichern nicht den Gruppennamen, sondern die **GID**. `ls -l` übersetzt die Nummer nur für die Anzeige in einen Namen. Hat die Gruppe `vertrieb` auf dem zweiten Server eine andere GID, gehören die Dateien dort plötzlich einer anderen Gruppe oder gar keiner.
 
 </details>

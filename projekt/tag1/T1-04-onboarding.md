@@ -1,17 +1,17 @@
-# T1-04 – Onboarding der Mitarbeitenden
+# T1-04: Onboarding der Mitarbeitenden
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Alle sollen ab morgen auf den Server!
 >
 > Hallo IT,
 >
-> bitte legt für alle Mitarbeitenden ein Konto an. Die Liste habt ihr ja. Bitte haltet euch an die Richtlinien der IT – ich möchte nicht, dass am Ende alle dasselbe Passwort behalten.
+> bitte legt für alle Mitarbeitenden ein Konto an. Die Liste habt ihr ja. Bitte haltet euch an die Richtlinien der IT. Ich möchte nicht, dass am Ende alle dasselbe Passwort behalten.
 >
 > Grete
 
 Alle Schritte führt ihr **auf dem Server** mit `sudo` aus. Verwendet für die Mitarbeitenden **`useradd`**, nicht `adduser`.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Richtlinien in Optionen übersetzen
 
@@ -39,18 +39,18 @@ Ihr beginnt mit **Lena Wagner** (`lwagner`, Vertrieb).
 
 Kontrolliert jeden Punkt und hakt ihn im Logbuch ab:
 
-1. `id lwagner` – Es müssen die Gruppen `lwagner`, `vertrieb` und `mitarbeitende` erscheinen.
-2. `grep lwagner /etc/passwd` – Stehen im Kommentarfeld `Lena Wagner`, als Heimatverzeichnis `/home/lwagner` und als Shell `/bin/bash`?
-3. `sudo ls -la /home/lwagner` – Gibt es das Verzeichnis, gehört es `lwagner` und enthält es die Dateien aus `/etc/skel` (z. B. `.bashrc`)?
-4. `sudo chage -l lwagner` – In der ersten Zeile (`Last password change`) muss `password must be changed` stehen – bzw. auf einem deutschsprachigen System sinngemäß „Passwort muss geändert werden“.
+1. `id lwagner`: Es müssen die Gruppen `lwagner`, `vertrieb` und `mitarbeitende` erscheinen.
+2. `grep lwagner /etc/passwd`: Stehen im Kommentarfeld `Lena Wagner`, als Heimatverzeichnis `/home/lwagner` und als Shell `/bin/bash`?
+3. `sudo ls -la /home/lwagner`: Gibt es das Verzeichnis, gehört es `lwagner` und enthält es die Dateien aus `/etc/skel` (z. B. `.bashrc`)?
+4. `sudo chage -l lwagner`: In der ersten Zeile (`Last password change`) muss `password must be changed` stehen, bzw. auf einem deutschsprachigen System sinngemäß „Passwort muss geändert werden“.
 5. Führt das Check-Skript aus. Im Abschnitt **T1-04** muss `lwagner` grün sein.
 
-Ist etwas rot? Korrigiert es mit `usermod` – oder löscht das Konto mit `sudo userdel -r lwagner` und legt es neu an.
+Ist etwas rot? Korrigiert es mit `usermod` oder löscht das Konto mit `sudo userdel -r lwagner` und legt es neu an.
 
 ### Schritt 4: Die übrigen Konten anlegen
 
 1. Teilt die restlichen zehn Mitarbeitenden auf: Jede Person im Team übernimmt eine Abteilung und sitzt dafür an der Tastatur. Die Geschäftsführung (eine Person) übernimmt, wer am schnellsten fertig ist.
-2. Legt die Konten genauso an wie das von Lena Wagner – mit Passwort und erzwungener Passwortänderung.
+2. Legt die Konten genauso an wie das von Lena Wagner, mit Passwort und erzwungener Passwortänderung.
 
 ### Schritt 5: Selbstkontrolle
 
@@ -68,9 +68,9 @@ Für jedes der elf Konten gilt:
 - Das Konto ist Mitglied seiner Abteilungsgruppe **und** der Gruppe `mitarbeitende`.
 - Ein Passwort ist gesetzt, das bei der ersten Anmeldung geändert werden muss.
 
-## ⭐⭐ Erweiterung: Viele Passwörter auf einmal
+## Erweiterung: Viele Passwörter auf einmal
 
-Elf Mal `passwd` und jedes Mal das Passwort zweimal eintippen – das geht schneller.
+Elf Mal `passwd` und jedes Mal das Passwort zweimal eintippen? Das geht schneller.
 
 1. Schaut in `man passwd` im Abschnitt `SEE ALSO` nach einem Kommando, das Passwörter für **mehrere** Konten auf einmal setzt.
 2. Lest in dessen Manpage nach, in welchem Format es die Eingabe erwartet.
@@ -78,7 +78,7 @@ Elf Mal `passwd` und jedes Mal das Passwort zweimal eintippen – das geht schne
 4. Achtung: Das Kommando setzt das Datum der letzten Passwortänderung neu. Erzwingt die Passwortänderung für die drei Konten deshalb erneut und prüft eines davon mit `sudo chage -l`.
 5. Überlegt und notiert im Logbuch: An welchen Stellen könnte das Startpasswort jetzt noch zu finden sein? Schaut euch dazu `history | tail` an.
 
-## ⭐⭐⭐ Profi: Euer erstes Skript
+## Profi: Euer erstes Skript
 
 Die Pinguin GmbH wächst und es kommen ständig neue Leute. Ihr schreibt ein Skript `onboarding.sh`, das Konten aus einer CSV-Datei anlegt.
 
@@ -109,17 +109,17 @@ Die Pinguin GmbH wächst und es kommen ständig neue Leute. Ihr schreibt ein Skr
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - `man useradd`: Ihr braucht Optionen für Heimatverzeichnis (*home*), Kommentar (*comment*), Shell (*shell*) und zusätzliche Gruppen (*groups*).
 - Passwort setzen: `man passwd`
 - Passwortänderung bei der nächsten Anmeldung erzwingen: `man chage` (Option für *lastday*) oder `man passwd` (Option für *expire*)
-- ⭐⭐: Schaut in den `SEE ALSO`-Abschnitt von `man passwd`.
+- Erweiterung: Schaut in den `SEE ALSO`-Abschnitt von `man passwd`.
 
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 useradd -m -c "..." -s ... -G ...,... <benutzer>
@@ -131,9 +131,9 @@ usermod ...                # zum Korrigieren
 userdel -r <benutzer>      # zum Löschen inklusive Heimatverzeichnis
 ```
 
-⭐⭐: `chpasswd` liest Zeilen der Form `benutzer:passwort` von der Standardeingabe.
+Erweiterung: `chpasswd` liest Zeilen der Form `benutzer:passwort` von der Standardeingabe.
 
-⭐⭐⭐: Grundgerüst für das Skript:
+Profi: Grundgerüst für das Skript:
 
 ```bash
 #!/bin/bash
@@ -151,7 +151,7 @@ done
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 **Schritt 1:**
 
@@ -179,11 +179,11 @@ sudo chage -l lwagner
 
 - `-m` legt das Heimatverzeichnis an und kopiert den Inhalt von `/etc/skel` hinein.
 - `-G` setzt die **zusätzlichen** Gruppen. Die primäre Gruppe ist eine eigene Gruppe mit dem Namen des Benutzers.
-- `chage -d 0` setzt das Datum der letzten Passwortänderung auf den 01.01.1970 – das Passwort gilt damit als abgelaufen und muss bei der nächsten Anmeldung geändert werden.
+- `chage -d 0` setzt das Datum der letzten Passwortänderung auf den 01.01.1970. Das Passwort gilt damit als abgelaufen und muss bei der nächsten Anmeldung geändert werden.
 
 **Schritt 5:** `useradd` gibt es auf jeder Distribution, es ist nicht interaktiv und lässt sich deshalb in Skripten verwenden. `adduser` ist ein Debian-spezifisches Komfortprogramm, das im Hintergrund selbst `useradd` aufruft.
 
-**⭐⭐:**
+**Erweiterung:**
 
 ```bash
 sudo chpasswd <<EOF
@@ -200,7 +200,7 @@ sudo chage -l lwagner
 
 Ein Passwort, das ihr auf der Kommandozeile oder in einem Here-Document eintippt, landet in der History (`~/.bash_history`). Wenn ihr die Passwörter in einer Datei sammelt, löscht sie danach.
 
-**⭐⭐⭐ `onboarding.sh`:**
+**Profi `onboarding.sh`:**
 
 ```bash
 #!/bin/bash

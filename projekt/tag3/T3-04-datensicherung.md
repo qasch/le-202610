@@ -1,7 +1,7 @@
-# T3-04 – Datensicherung
+# T3-04: Datensicherung
 
 > **Von:** Grete Frost (Geschäftsführung)
-> **Betreff:** Datensicherung – jetzt aber wirklich
+> **Betreff:** Datensicherung, jetzt aber wirklich
 >
 > Hallo IT,
 >
@@ -13,7 +13,7 @@
 
 Alle Schritte führt ihr **auf dem Server** aus. Gesichert wird mit `sudo`, weil nur `root` alle Abteilungsordner lesen darf.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Ein sicherer Ort für die Sicherungen
 
@@ -38,7 +38,7 @@ Alle Schritte führt ihr **auf dem Server** aus. Gesichert wird mit `sudo`, weil
 2. Zählt die Einträge im Archiv (`| wc -l`) und vergleicht mit der Anzahl der Dateien und Verzeichnisse in `/srv/firma` (`sudo find /srv/firma | wc -l`). Stimmen die Zahlen überein?
 3. Mit der Option `-v` zeigt `tar -t` mehr. Was zusätzlich? Werden Besitzer, Gruppe und Rechte mitgesichert?
 
-### Schritt 4: Der Ernstfall – eine Datei ist weg
+### Schritt 4: Der Ernstfall, eine Datei ist weg
 
 1. Lena löscht „aus Versehen“ ihr Angebot. Öffnet eine Shell als `lwagner` und führt aus:
 
@@ -63,7 +63,7 @@ Führt das Check-Skript aus. Im Abschnitt **T3-04** sollten alle Punkte grün se
 - In `/srv/backup` liegt mindestens ein Archiv `firma-<datum>.tar.gz`, das `srv/firma/vertrieb/angebot-1.txt` enthält.
 - `/srv/firma/vertrieb/angebot-1.txt` existiert wieder und gehört `lwagner:vertrieb`.
 
-## ⭐⭐ Erweiterung: Kompression vergleichen und auslagern
+## Erweiterung: Kompression vergleichen und auslagern
 
 ### Kompressionsverfahren
 
@@ -73,17 +73,17 @@ Führt das Check-Skript aus. Im Abschnitt **T3-04** sollten alle Punkte grün se
 
    | Verfahren | Option | Endung | Größe in Byte |
    |---|---|---|---|
-   | ohne | – | `.tar` | |
+   | ohne | - | `.tar` | |
    | gzip | `-z` | `.tar.gz` | |
    | bzip2 | `-j` | `.tar.bz2` | |
    | xz | `-J` | `.tar.xz` | |
 
-4. Das unkomprimierte Archiv ist genau 20480 Byte groß oder ein Vielfaches von 10240 Byte – obwohl die Dateien zusammen nur wenige hundert Byte haben. Warum? (Tipp: Sucht in `man tar` nach `record` und `blocking-factor`.)
+4. Das unkomprimierte Archiv ist genau 20480 Byte groß oder ein Vielfaches von 10240 Byte, obwohl die Dateien zusammen nur wenige hundert Byte haben. Warum? (Tipp: Sucht in `man tar` nach `record` und `blocking-factor`.)
 5. Räumt die Archive in `/tmp` wieder auf.
 
 ### Eine Sicherung auf demselben Server?
 
-1. Überlegt: Was passiert mit der Sicherung, wenn die Festplatte des Servers kaputtgeht – oder ein Angreifer `root` wird?
+1. Überlegt: Was passiert mit der Sicherung, wenn die Festplatte des Servers kaputtgeht oder ein Angreifer `root` wird?
 2. Recherchiert die **3-2-1-Regel** für Datensicherungen und notiert sie im Logbuch.
 3. Kopiert die Sicherung auf euren Arbeitsplatz. Weil nur `root` sie lesen darf, legt ihr auf dem Server zuerst eine Kopie für euer Konto an und holt sie dann mit `scp` ab:
 
@@ -97,18 +97,18 @@ Führt das Check-Skript aus. Im Abschnitt **T3-04** sollten alle Punkte grün se
 
 4. Löscht die Kopie im Heimatverzeichnis auf dem Server danach wieder. Warum?
 
-## ⭐⭐⭐ Profi: Und das Konto `pinguin-backup`?
+## Profi: Und das Konto `pinguin-backup`?
 
 In T1-05 habt ihr das Dienstkonto `pinguin-backup` angelegt. Eigentlich soll die Sicherung nicht als `root` laufen.
 
-1. Versucht, die Sicherung als `pinguin-backup` zu erstellen. Mit `sudo -u` startet ihr ein einzelnes Kommando als dieses Konto – dafür braucht es keine Login-Shell:
+1. Versucht, die Sicherung als `pinguin-backup` zu erstellen. Mit `sudo -u` startet ihr ein einzelnes Kommando als dieses Konto, dafür braucht es keine Login-Shell:
 
    ```bash
    sudo -u pinguin-backup tar -czf /tmp/test-backup.tar.gz /srv/firma
    ```
 
 2. Notiert die Fehlermeldungen. Welche Ordner kann `pinguin-backup` nicht lesen und warum?
-3. Diskutiert im Team und notiert im Logbuch: Wie könnte man `pinguin-backup` alles **lesen** lassen, ohne dass es **schreiben** darf? Erinnert euch an Gretes Wunsch in T2-04 – es ist dasselbe Problem.
+3. Diskutiert im Team und notiert im Logbuch: Wie könnte man `pinguin-backup` alles **lesen** lassen, ohne dass es **schreiben** darf? Erinnert euch an Gretes Wunsch in T2-04. Es ist dasselbe Problem.
 4. Warum ist es trotzdem eine schlechte Idee, `pinguin-backup` einfach in alle Abteilungsgruppen aufzunehmen?
 5. Räumt `/tmp/test-backup.tar.gz` auf.
 
@@ -117,7 +117,7 @@ In T1-05 habt ihr das Dienstkonto `pinguin-backup` angelegt. Eigentlich soll die
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - `man tar`: `-c` erstellen, `-t` auflisten, `-x` auspacken, `-f` Archivdatei, `-z`/`-j`/`-J` Kompression, `-v` ausführlich, `-C` Zielverzeichnis
 - Datumsformate: `man date`, `%F` = `%Y-%m-%d`
@@ -127,7 +127,7 @@ In T1-05 habt ihr das Dienstkonto `pinguin-backup` angelegt. Eigentlich soll die
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 sudo mkdir /srv/backup
@@ -145,7 +145,7 @@ sudo -u pinguin-backup tar -czf /tmp/test-backup.tar.gz /srv/firma
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 ```bash
 # Schritt 1
@@ -173,12 +173,12 @@ ls -l /srv/firma/vertrieb
 
 **Schritt 2:** `date +%F` erzeugt `JJJJ-MM-TT`, z. B. `2026-10-08`. In diesem Format sortiert `ls` die Sicherungen automatisch in zeitlicher Reihenfolge. `-c` = erstellen (*create*), `-z` = mit `gzip` komprimieren, `-f` = Name der Archivdatei (muss direkt danach folgen). `tar` entfernt den führenden `/`, damit beim Auspacken nicht versehentlich die Originale überschrieben werden.
 
-**Schritt 3:** Die Zahlen stimmen überein: Beide zählen `/srv/firma` selbst, alle Unterverzeichnisse und alle Dateien. `tar -tv` zeigt zusätzlich Rechte, Besitzer, Gruppe, Größe und Datum – all das wird mitgesichert.
+**Schritt 3:** Die Zahlen stimmen überein: Beide zählen `/srv/firma` selbst, alle Unterverzeichnisse und alle Dateien. `tar -tv` zeigt zusätzlich Rechte, Besitzer, Gruppe, Größe und Datum. All das wird mitgesichert.
 
 **Schritt 4:** Mit `-C /` packt `tar` relativ zu `/` aus, aus `srv/firma/vertrieb/angebot-1.txt` wird also wieder `/srv/firma/vertrieb/angebot-1.txt`. Weil `root` auspackt, stimmen Besitzer (`lwagner`), Gruppe (`vertrieb`) und Rechte wieder. Alle anderen Dateien im Archiv bleiben unberührt, weil nur dieser eine Pfad angegeben ist.
 
-**⭐⭐:** Bei wenigen kleinen Textdateien ist `xz` meist am kleinsten, `gzip` am schnellsten – die Unterschiede sind hier gering. Das unkomprimierte Archiv ist groß, weil `tar` für jede Datei und jedes Verzeichnis einen Kopfblock von 512 Byte schreibt, jede Datei auf volle 512 Byte auffüllt und am Ende zwei leere Blöcke anhängt. Geschrieben wird außerdem in *Records* von 20 Blöcken (10240 Byte), deshalb ist die Größe immer ein Vielfaches davon – bei `/srv/firma` mit seinen wenigen Dateien 20480 Byte. **3-2-1-Regel:** **3** Kopien der Daten, auf **2** verschiedenen Speichermedien, davon **1** an einem anderen Ort. Die Kopie im Heimatverzeichnis muss weg, weil sie sonst die Rechte von `/srv/backup` umgeht.
+**Erweiterung:** Bei wenigen kleinen Textdateien ist `xz` meist am kleinsten, `gzip` am schnellsten, die Unterschiede sind hier gering. Das unkomprimierte Archiv ist groß, weil `tar` für jede Datei und jedes Verzeichnis einen Kopfblock von 512 Byte schreibt, jede Datei auf volle 512 Byte auffüllt und am Ende zwei leere Blöcke anhängt. Geschrieben wird außerdem in *Records* von 20 Blöcken (10240 Byte), deshalb ist die Größe immer ein Vielfaches davon, bei `/srv/firma` mit seinen wenigen Dateien 20480 Byte. **3-2-1-Regel:** **3** Kopien der Daten, auf **2** verschiedenen Speichermedien, davon **1** an einem anderen Ort. Die Kopie im Heimatverzeichnis muss weg, weil sie sonst die Rechte von `/srv/backup` umgeht.
 
-**⭐⭐⭐:** `pinguin-backup` darf weder in die Abteilungsordner (`2770`, keine Rechte für `others`) noch in die privaten Heimatverzeichnisse. Es bekommt `Permission denied` für fast alles – außer dem, was für alle lesbar ist. „Alles lesen, nichts schreiben“ ist mit den klassischen Rechten dasselbe ungelöste Problem wie bei Grete (T2-04). In allen Abteilungsgruppen hätte `pinguin-backup` auch überall **Schreibrecht** – ein Angreifer, der dieses Konto übernimmt, könnte alle Daten verändern oder löschen. In der Praxis läuft die Sicherung deshalb meist als `root`, oder man verwendet ACLs bzw. spezielle Fähigkeiten (*Capabilities*) für das Backup-Programm.
+**Profi:** `pinguin-backup` darf weder in die Abteilungsordner (`2770`, keine Rechte für `others`) noch in die privaten Heimatverzeichnisse. Es bekommt `Permission denied` für fast alles, außer dem, was für alle lesbar ist. „Alles lesen, nichts schreiben“ ist mit den klassischen Rechten dasselbe ungelöste Problem wie bei Grete (T2-04). In allen Abteilungsgruppen hätte `pinguin-backup` auch überall **Schreibrecht**. Ein Angreifer, der dieses Konto übernimmt, könnte alle Daten verändern oder löschen. In der Praxis läuft die Sicherung deshalb meist als `root`, oder man verwendet ACLs bzw. spezielle Fähigkeiten (*Capabilities*) für das Backup-Programm.
 
 </details>

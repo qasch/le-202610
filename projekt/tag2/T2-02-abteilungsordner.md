@@ -1,4 +1,4 @@
-# T2-02 – Abteilungsordner
+# T2-02: Abteilungsordner
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Endlich gemeinsame Ordner
@@ -12,9 +12,9 @@
 >
 > Grete
 
-Alle Schritte führt ihr **auf dem Server** aus. Die Ordner gehören `root` – die Abteilungen arbeiten darin über ihre **Gruppe**.
+Alle Schritte führt ihr **auf dem Server** aus. Die Ordner gehören `root`, die Abteilungen arbeiten darin über ihre **Gruppe**.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Ordner anlegen
 
@@ -42,7 +42,7 @@ Alle Schritte führt ihr **auf dem Server** aus. Die Ordner gehören `root` – 
    ```
 
 2. Notiert Besitzer, **Gruppe** und Rechte der neuen Datei.
-3. Notiert außerdem die Ausgabe von `umask`. Ihr braucht sie in ⭐⭐. Kehrt mit `exit` zurück.
+3. Notiert außerdem die Ausgabe von `umask`. Ihr braucht sie in Erweiterung. Kehrt mit `exit` zurück.
 4. Öffnet eine Shell als `mkaya` und versucht, an die Datei eine Zeile anzuhängen:
 
    ```bash
@@ -69,7 +69,7 @@ Neue Dateien sollen automatisch der **Gruppe des Ordners** gehören, nicht der p
 
 `angebot-1.txt` gehört noch Lenas privater Gruppe. Das SGID-Bit wirkt nur auf **neue** Dateien.
 
-1. Lena ändert die Gruppe ihrer Datei auf `vertrieb` – **ohne** `sudo`. Sucht das passende Kommando und probiert es aus. Warum darf sie das?
+1. Lena ändert die Gruppe ihrer Datei auf `vertrieb`, **ohne** `sudo`. Sucht das passende Kommando und probiert es aus. Warum darf sie das?
 2. Murat hängt seine Zeile an. Prüft mit `ls -l` und `cat`.
 
 ### Schritt 8: Wer kommt wohin?
@@ -98,9 +98,9 @@ Führt das Check-Skript aus. Im Abschnitt **T2-02** sollten alle Punkte grün se
 
 > Grete Frost kommt jetzt nicht in die Abteilungsordner. Darum geht es im Bonus-Ticket **T2-04**.
 
-## ⭐⭐ Erweiterung: Die `umask`
+## Erweiterung: Die `umask`
 
-Warum hat eine neue Datei `rw-rw-r--` – und nicht `rwxrwxrwx`? Das bestimmt die **umask**.
+Warum hat eine neue Datei `rw-rw-r--` und nicht `rwxrwxrwx`? Das bestimmt die **umask**.
 
 1. Lest in `help umask` nach, was das Kommando tut.
 2. Führt `umask` und `umask -S` in eurem **eigenen** Admin-Konto aus und vergleicht mit dem Wert, den ihr in Schritt 4 bei Lena notiert habt.
@@ -122,10 +122,10 @@ Warum hat eine neue Datei `rw-rw-r--` – und nicht `rwxrwxrwx`? Das bestimmt di
    | `077` | | |
 
 5. Erklärt im Logbuch: Von welchen Ausgangsrechten (für Dateien und für Verzeichnisse) zieht die umask etwas ab? Warum bekommt eine neue Datei nie das `x`-Recht?
-6. Welche umask wäre für die Arbeit in den Abteilungsordnern sinnvoll – und warum ist `000` keine gute Idee?
+6. Welche umask wäre für die Arbeit in den Abteilungsordnern sinnvoll, und warum ist `000` keine gute Idee?
 7. Räumt auf: `rm -r datei-* ordner-*`
 
-## ⭐⭐⭐ Profi: Verschieben, Kopieren, Unterordner
+## Profi: Verschieben, Kopieren, Unterordner
 
 1. Lena legt in ihrem **Heimatverzeichnis** die Datei `entwurf.txt` an und **verschiebt** sie mit `mv` in den Vertriebsordner.
 2. Lena legt eine zweite Datei `entwurf2.txt` im Heimatverzeichnis an und **kopiert** sie mit `cp` in den Vertriebsordner.
@@ -139,7 +139,7 @@ Warum hat eine neue Datei `rw-rw-r--` – und nicht `rwxrwxrwx`? Das bestimmt di
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - Übergeordnete Verzeichnisse anlegen: `man mkdir` (Suchbegriff `parents`)
 - Gruppe ändern: `man chgrp`, oder `man chown` (Schreibweise `:gruppe`)
@@ -150,7 +150,7 @@ Warum hat eine neue Datei `rw-rw-r--` – und nicht `rwxrwxrwx`? Das bestimmt di
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 sudo mkdir -p /srv/firma/{geschaeftsfuehrung,vertrieb,entwicklung,buchhaltung}
@@ -167,10 +167,10 @@ umask -S
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 ```bash
-# Schritt 1–3
+# Schritt 1 bis 3
 sudo mkdir -p /srv/firma/{geschaeftsfuehrung,vertrieb,entwicklung,buchhaltung}
 for abteilung in geschaeftsfuehrung vertrieb entwicklung buchhaltung; do
 	sudo chgrp "$abteilung" "/srv/firma/$abteilung"
@@ -200,25 +200,25 @@ chgrp vertrieb /srv/firma/vertrieb/angebot-1.txt
 
 Die vier `chgrp`-Aufrufe könnt ihr natürlich auch einzeln eintippen.
 
-**Schritt 4:** Die neue Datei gehört `lwagner` und der **privaten Gruppe** `lwagner`. Für Murat ist sie deshalb eine Datei von „anderen“ – und die dürfen höchstens lesen. Dass Murat in den **Ordner** darf, hilft ihm nicht: Das Recht, eine Datei zu ändern, hängt an der Datei selbst.
+**Schritt 4:** Die neue Datei gehört `lwagner` und der **privaten Gruppe** `lwagner`. Für Murat ist sie deshalb eine Datei von „anderen“, und die dürfen höchstens lesen. Dass Murat in den **Ordner** darf, hilft ihm nicht: Das Recht, eine Datei zu ändern, hängt an der Datei selbst.
 
-**Schritt 5:** `drwxrws---` – das `s` an der Stelle des `x` der Gruppe zeigt das SGID-Bit. Steht dort ein großes `S`, ist das SGID-Bit gesetzt, aber das `x` für die Gruppe fehlt.
+**Schritt 5:** `drwxrws---`. Das `s` an der Stelle des `x` der Gruppe zeigt das SGID-Bit. Steht dort ein großes `S`, ist das SGID-Bit gesetzt, aber das `x` für die Gruppe fehlt.
 
-**Schritt 6:** `angebot-2.txt` gehört jetzt der Gruppe `vertrieb`. Wegen Lenas umask `0002` hat sie `rw-rw-r--` – die Gruppe darf schreiben, also auch Murat.
+**Schritt 6:** `angebot-2.txt` gehört jetzt der Gruppe `vertrieb`. Wegen Lenas umask `0002` hat sie `rw-rw-r--`. Die Gruppe darf schreiben, also auch Murat.
 
-**Schritt 7:** `chgrp vertrieb angebot-1.txt` – als Besitzerin darf Lena die Gruppe auf jede Gruppe ändern, in der sie Mitglied ist. Auf eine fremde Gruppe (z. B. `buchhaltung`) dürfte sie das nicht.
+**Schritt 7:** `chgrp vertrieb angebot-1.txt`. Als Besitzerin darf Lena die Gruppe auf jede Gruppe ändern, in der sie Mitglied ist. Auf eine fremde Gruppe (z. B. `buchhaltung`) dürfte sie das nicht.
 
 **Schritt 8:**
 
 | Person | Ordner | `ls` | `touch` | Warum? |
 |---|---|---|---|---|
-| `lwagner` | `entwicklung` | ✘ | ✘ | nicht in der Gruppe → `others` → `---` |
-| `mkaya` | `entwicklung` | ✔ | ✔ | Mitglied von `entwicklung` (T1-05) |
-| `jbecker` | `buchhaltung` | ✘ | ✘ | nicht in der Gruppe |
-| `pkrause` | `buchhaltung` | ✔ | ✔ | Mitglied von `buchhaltung` |
-| `gfrost` | `vertrieb` | ✘ | ✘ | nur in `geschaeftsfuehrung` |
+| `lwagner` | `entwicklung` | nein | nein | nicht in der Gruppe, also gilt `others` mit `---` |
+| `mkaya` | `entwicklung` | ja | ja | Mitglied von `entwicklung` (T1-05) |
+| `jbecker` | `buchhaltung` | nein | nein | nicht in der Gruppe |
+| `pkrause` | `buchhaltung` | ja | ja | Mitglied von `buchhaltung` |
+| `gfrost` | `vertrieb` | nein | nein | nur in `geschaeftsfuehrung` |
 
-**⭐⭐:** Die umask gibt an, welche Rechte **weggenommen** werden. Ausgangspunkt ist `666` für Dateien und `777` für Verzeichnisse. Neue Dateien bekommen nie `x`, weil eine frisch angelegte Datei fast nie ein Programm ist – das `x` setzt man bewusst mit `chmod +x`.
+**Erweiterung:** Die umask gibt an, welche Rechte **weggenommen** werden. Ausgangspunkt ist `666` für Dateien und `777` für Verzeichnisse. Neue Dateien bekommen nie `x`, weil eine frisch angelegte Datei fast nie ein Programm ist. Das `x` setzt man bewusst mit `chmod +x`.
 
 | umask | neue Datei | neues Verzeichnis |
 |---|---|---|
@@ -228,8 +228,8 @@ Die vier `chgrp`-Aufrufe könnt ihr natürlich auch einzeln eintippen.
 
 Für gemeinsame Ordner ist `002` sinnvoll: Die Gruppe darf mitschreiben. `000` würde jeder Person auf dem System Schreibrecht an allen neuen Dateien geben.
 
-Die umask `0002` kommt aus `/etc/login.defs`: Dort steht meist `UMASK 022`, aber wegen `USERGROUPS_ENAB yes` wird für Konten mit eigener privater Gruppe die Gruppenstelle an die Besitzerstelle angeglichen – aus `022` wird `002`. Das ist ungefährlich: In der privaten Gruppe ist nur die Person selbst. Erst in einem Ordner mit SGID-Bit wird daraus ein Schreibrecht für die ganze Abteilung – genau das, was Grete wollte.
+Die umask `0002` kommt aus `/etc/login.defs`: Dort steht meist `UMASK 022`, aber wegen `USERGROUPS_ENAB yes` wird für Konten mit eigener privater Gruppe die Gruppenstelle an die Besitzerstelle angeglichen, aus `022` wird `002`. Das ist ungefährlich: In der privaten Gruppe ist nur die Person selbst. Erst in einem Ordner mit SGID-Bit wird daraus ein Schreibrecht für die ganze Abteilung, genau das, was Grete wollte.
 
-**⭐⭐⭐:** `mv` innerhalb desselben Dateisystems verschiebt nur den Verzeichniseintrag – die Datei bleibt dieselbe und behält Besitzer, Gruppe (`lwagner`) und Rechte. `cp` legt eine **neue** Datei an, die das SGID-Bit des Ordners berücksichtigt und deshalb der Gruppe `vertrieb` gehört. Neue Unterordner erben das SGID-Bit, sodass die Regel im ganzen Baum gilt. Regel für die Mitarbeitenden: „Dateien in den Abteilungsordner **kopieren**, nicht verschieben – oder danach mit `chgrp` die Gruppe anpassen.“
+**Profi:** `mv` innerhalb desselben Dateisystems verschiebt nur den Verzeichniseintrag. Die Datei bleibt dieselbe und behält Besitzer, Gruppe (`lwagner`) und Rechte. `cp` legt eine **neue** Datei an, die das SGID-Bit des Ordners berücksichtigt und deshalb der Gruppe `vertrieb` gehört. Neue Unterordner erben das SGID-Bit, sodass die Regel im ganzen Baum gilt. Regel für die Mitarbeitenden: „Dateien in den Abteilungsordner **kopieren**, nicht verschieben, oder danach mit `chgrp` die Gruppe anpassen.“
 
 </details>

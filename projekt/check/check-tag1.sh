@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# check-tag1.sh – Selbstkontrolle für Tag 1 des Projekts "Pinguin GmbH"
+# check-tag1.sh: Selbstkontrolle für Tag 1 des Projekts "Pinguin GmbH"
 #
 # Aufruf auf dem Teamserver:
 #   sudo bash check-tag1.sh
@@ -45,19 +45,19 @@ gesamt=0
 ok() {
 	bestanden=$((bestanden + 1))
 	gesamt=$((gesamt + 1))
-	printf '  %s✔%s %s\n' "$gruen" "$normal" "$1"
+	printf '  %s[OK]%s %s\n' "$gruen" "$normal" "$1"
 }
 
 fehler() {
 	gesamt=$((gesamt + 1))
-	printf '  %s✘%s %s\n' "$rot" "$normal" "$1"
+	printf '  %s[FEHLER]%s %s\n' "$rot" "$normal" "$1"
 	if [[ -n "$2" ]]; then
-		printf '      %s→ %s%s\n' "$gelb" "$2" "$normal"
+		printf '      %sTipp: %s%s\n' "$gelb" "$2" "$normal"
 	fi
 }
 
 info() {
-	printf '  %sℹ%s %s\n' "$gelb" "$normal" "$1"
+	printf '  %s[INFO]%s %s\n' "$gelb" "$normal" "$1"
 }
 
 ueberschrift() {
@@ -85,7 +85,7 @@ in_gruppe() {
 }
 
 # Prüft ein Konto gegen die Richtlinien der IT. Gibt die gefundenen
-# Probleme aus (eines pro Zeile) – keine Ausgabe bedeutet: alles in Ordnung.
+# Probleme aus (eines pro Zeile), keine Ausgabe bedeutet: alles in Ordnung.
 probleme_konto() {
 	local benutzer="$1" name="$2" abteilung="$3"
 	local heim shell kommentar hash
@@ -146,11 +146,11 @@ if [[ -z "$CHECK_ROOT" && $EUID -ne 0 ]]; then
 fi
 
 if [[ ! -r "$etc/shadow" ]]; then
-	echo "$etc/shadow ist nicht lesbar – bitte mit Root-Rechten ausführen." >&2
+	echo "$etc/shadow ist nicht lesbar, bitte mit Root-Rechten ausführen." >&2
 	exit 1
 fi
 
-printf '%sSelbstkontrolle Tag 1 – Pinguin GmbH%s\n' "$fett" "$normal"
+printf '%sSelbstkontrolle Tag 1, Pinguin GmbH%s\n' "$fett" "$normal"
 printf 'Server: %s\n' "$hostname"
 
 # --- T1-01 ------------------------------------------------------------------
@@ -217,7 +217,7 @@ for gruppe in "${gruppen[@]}"; do
 done
 
 if [[ -e "$etc/skel/WILLKOMMEN.txt" ]]; then
-	info "⭐⭐ /etc/skel/WILLKOMMEN.txt ist vorhanden"
+	info "Erweiterung: /etc/skel/WILLKOMMEN.txt ist vorhanden"
 fi
 
 # --- T1-04 ------------------------------------------------------------------
@@ -265,7 +265,7 @@ done
 if [[ ${#fehlende[@]} -eq 0 ]]; then
 	ok "mkaya ist in vertrieb, entwicklung und mitarbeitende"
 else
-	fehler "mkaya fehlt in: ${fehlende[*]}" "usermod -G ersetzt alle zusätzlichen Gruppen – was macht -a?"
+	fehler "mkaya fehlt in: ${fehlende[*]}" "usermod -G ersetzt alle zusätzlichen Gruppen. Was macht -a?"
 fi
 
 hash="$(feld shadow elindner 2)"
@@ -297,7 +297,7 @@ fi
 # --- Ergebnis ---------------------------------------------------------------
 echo
 if [[ $bestanden -eq $gesamt ]]; then
-	printf '%s%s🎉 %d von %d Prüfungen bestanden – Tag 1 abgenommen!%s\n' \
+	printf '%s%s%d von %d Prüfungen bestanden, Tag 1 abgenommen.%s\n' \
 		"$fett" "$gruen" "$bestanden" "$gesamt" "$normal"
 else
 	printf '%s%d von %d Prüfungen bestanden.%s\n' "$fett" "$bestanden" "$gesamt" "$normal"

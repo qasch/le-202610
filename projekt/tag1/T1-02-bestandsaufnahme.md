@@ -1,4 +1,4 @@
-# T1-02 – Bestandsaufnahme: Wer ist schon da?
+# T1-02: Bestandsaufnahme: Wer ist schon da?
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Wer hat eigentlich Zugriff auf unseren Server?
@@ -9,14 +9,14 @@
 >
 > Grete
 
-Alle Schritte führt ihr **auf dem Server** aus, angemeldet mit eurem persönlichen Konto. Haltet die Ergebnisse im Logbuch fest – wir besprechen sie im nächsten Standup.
+Alle Schritte führt ihr **auf dem Server** aus, angemeldet mit eurem persönlichen Konto. Haltet die Ergebnisse im Logbuch fest. Wir besprechen sie im nächsten Standup.
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Konten zählen
 
 1. Jede Zeile in `/etc/passwd` ist ein Benutzerkonto. Zählt die Zeilen mit dem Kommando, das ihr aus dem Kapitel zu Pipelines kennt.
-2. Notiert die Anzahl. Ihr habt selbst drei Konten angelegt – wie viele waren also schon vorher da?
+2. Notiert die Anzahl. Ihr habt selbst drei Konten angelegt. Wie viele waren also schon vorher da?
 
 ### Schritt 2: Login-Shells untersuchen
 
@@ -66,7 +66,7 @@ Dafür sind alle drei Teammitglieder per SSH am Server angemeldet.
 2. Führt `w` aus. Welche Informationen zeigt `w` zusätzlich zu `who`? Achtet auf die erste Zeile und die Spalte `WHAT`.
 3. Führt `last | head -n 10` aus. Wann hat sich heute wer zum ersten Mal angemeldet? Was bedeutet `still logged in`?
 
-## ⭐⭐ Erweiterung
+## Erweiterung
 
 ### `su`, `su -` und `sudo -i` vergleichen
 
@@ -86,7 +86,7 @@ Dafür sind alle drei Teammitglieder per SSH am Server angemeldet.
 1. Gebt mit `sudo` die Zeilen von `root`, `daemon` und eurem eigenen Konto aus `/etc/shadow` aus.
 2. Vergleicht jeweils das zweite Feld. Welche Zeichen stehen bei Konten, die sich nicht mit Passwort anmelden können?
 
-## ⭐⭐⭐ Profi
+## Profi
 
 ### Konten mit Login-Shell auflisten
 
@@ -104,7 +104,7 @@ Dafür sind alle drei Teammitglieder per SSH am Server angemeldet.
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - Aufbau der Dateien: `man 5 passwd`, `man 5 shadow`, `man 5 group`
 - Bereich der UIDs: `/etc/login.defs`
@@ -114,7 +114,7 @@ Dafür sind alle drei Teammitglieder per SSH am Server angemeldet.
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Welche Kommandos?</summary>
+<summary>Hilfekarte 2: Welche Kommandos?</summary>
 
 ```text
 wc -l
@@ -131,7 +131,7 @@ sudo journalctl -u ssh
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
 ```bash
 # Schritt 1: Konten zählen
@@ -164,23 +164,23 @@ w
 last | head -n 10
 ```
 
-**Zu Schritt 2:** Systemkonten haben meist `/usr/sbin/nologin` oder `/bin/false` als Shell. `sync` hat `/bin/sync` – eine Besonderheit aus der Unix-Geschichte.
+**Zu Schritt 2:** Systemkonten haben meist `/usr/sbin/nologin` oder `/bin/false` als Shell. `sync` hat `/bin/sync`, eine Besonderheit aus der Unix-Geschichte.
 
 **Zu Schritt 3:** `root` hat immer die UID 0. Normale Benutzer beginnen auf Debian bei `UID_MIN 1000`, Systemkonten liegen darunter (bis `SYS_UID_MAX 999`).
 
-**Zu Schritt 4:** Systemkonten werden von Diensten verwendet. Ein Dienst läuft mit den Rechten seines eigenen Kontos – wird er kompromittiert, hat der Angreifer nur dessen Rechte und nicht die von `root`. `nobody` ist ein Konto ohne jegliche Rechte für Prozesse, die gar nichts dürfen sollen.
+**Zu Schritt 4:** Systemkonten werden von Diensten verwendet. Ein Dienst läuft mit den Rechten seines eigenen Kontos. Wird er kompromittiert, hat der Angreifer nur dessen Rechte und nicht die von `root`. `nobody` ist ein Konto ohne jegliche Rechte für Prozesse, die gar nichts dürfen sollen.
 
 **Zu Schritt 5:**
 
-- `/etc/passwd`: `name:x:UID:GID:Kommentar:Heimatverzeichnis:Shell` – das `x` bedeutet „Passwort steht in `/etc/shadow`“.
-- `/etc/shadow`: `name:passwort-hash:letzte-änderung:min:max:warnung:inaktiv:ablaufdatum:reserviert` – Datumsangaben in Tagen seit dem 01.01.1970.
+- `/etc/passwd`: `name:x:UID:GID:Kommentar:Heimatverzeichnis:Shell`. Das `x` bedeutet „Passwort steht in `/etc/shadow`“.
+- `/etc/shadow`: `name:passwort-hash:letzte-änderung:min:max:warnung:inaktiv:ablaufdatum:reserviert`. Datumsangaben in Tagen seit dem 01.01.1970.
 - `/etc/group`: `gruppenname:x:GID:mitglieder,durch,komma,getrennt`
 
 **Zu Schritt 6:** `/etc/passwd` muss für alle lesbar sein (`-rw-r--r--`), da viele Programme Benutzernamen und UIDs nachschlagen (z. B. `ls -l`). Die Passwort-Hashes stehen deshalb in `/etc/shadow`, die nur `root` und die Gruppe `shadow` lesen dürfen (`-rw-r-----`).
 
 **Zu Schritt 7:** `w` zeigt in der ersten Zeile Uhrzeit, Laufzeit des Systems und Systemlast, außerdem in der Spalte `WHAT`, welches Programm in der Sitzung gerade läuft. `still logged in` bei `last` bedeutet, dass die Sitzung noch offen ist.
 
-**Zu ⭐⭐ `su`/`sudo -i`:**
+**Zu Erweiterung `su`/`sudo -i`:**
 
 | Kommando | Passwort | `whoami` | `pwd` | `/usr/sbin` im `PATH` |
 |---|---|---|---|---|
@@ -190,15 +190,15 @@ last | head -n 10
 
 `useradd` liegt in `/usr/sbin`. Ohne diesen Pfad im `PATH` findet die Shell das Kommando nicht.
 
-**Zu ⭐⭐ gesperrte Passwörter:** `!` oder `*` im zweiten Feld – damit ist keine Anmeldung mit Passwort möglich. Bei `root` steht ein Hash, wenn bei der Installation ein Root-Passwort vergeben wurde.
+**Zu Erweiterung gesperrte Passwörter:** `!` oder `*` im zweiten Feld. Damit ist keine Anmeldung mit Passwort möglich. Bei `root` steht ein Hash, wenn bei der Installation ein Root-Passwort vergeben wurde.
 
-**Zu ⭐⭐⭐ Pipeline:**
+**Zu Profi Pipeline:**
 
 ```bash
 grep -v -E 'nologin|false' /etc/passwd | cut -d: -f1,3 | sort -t: -k2 -n
 ```
 
-**Zu ⭐⭐⭐ Einbruchsversuch:**
+**Zu Profi Einbruchsversuch:**
 
 ```bash
 sudo journalctl -u ssh | grep -i failed

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# check-tag3.sh – Selbstkontrolle für Tag 3 des Projekts "Pinguin GmbH"
+# check-tag3.sh: Selbstkontrolle für Tag 3 des Projekts "Pinguin GmbH"
 #
 # Aufruf auf dem Teamserver:
 #   sudo bash check-tag3.sh
@@ -27,19 +27,19 @@ gesamt=0
 ok() {
 	bestanden=$((bestanden + 1))
 	gesamt=$((gesamt + 1))
-	printf '  %s✔%s %s\n' "$gruen" "$normal" "$1"
+	printf '  %s[OK]%s %s\n' "$gruen" "$normal" "$1"
 }
 
 fehler() {
 	gesamt=$((gesamt + 1))
-	printf '  %s✘%s %s\n' "$rot" "$normal" "$1"
+	printf '  %s[FEHLER]%s %s\n' "$rot" "$normal" "$1"
 	if [[ -n "$2" ]]; then
-		printf '      %s→ %s%s\n' "$gelb" "$2" "$normal"
+		printf '      %sTipp: %s%s\n' "$gelb" "$2" "$normal"
 	fi
 }
 
 info() {
-	printf '  %sℹ%s %s\n' "$gelb" "$normal" "$1"
+	printf '  %s[INFO]%s %s\n' "$gelb" "$normal" "$1"
 }
 
 ueberschrift() {
@@ -52,7 +52,7 @@ feld() {
 	awk -F: -v name="$name" -v nr="$nr" '$1 == name { print $nr; exit }' "$etc/$datei"
 }
 
-# Name zu einer UID bzw. GID – oder die Nummer, wenn es keinen Namen gibt
+# Name zu einer UID bzw. GID, oder die Nummer, wenn es keinen Namen gibt
 name_zu() {
 	local datei="$1" nummer="$2" name
 	name="$(awk -F: -v nr="$nummer" '$3 == nr { print $1; exit }' "$etc/$datei")"
@@ -89,7 +89,7 @@ if [[ -z "$CHECK_ROOT" && $EUID -ne 0 ]]; then
 	exit 1
 fi
 
-printf '%sSelbstkontrolle Tag 3 – Pinguin GmbH%s\n' "$fett" "$normal"
+printf '%sSelbstkontrolle Tag 3, Pinguin GmbH%s\n' "$fett" "$normal"
 printf 'Server: %s\n' "$hostname"
 
 # --- T3-01 ------------------------------------------------------------------
@@ -135,7 +135,7 @@ probleme="$(probleme_pfad /srv/backup root root 700)"
 if [[ -z "$probleme" ]]; then
 	ok "/srv/backup (root:root, 700)"
 else
-	fehler "/srv/backup: $(zeile <<<"$probleme")" "Sicherungen enthalten alle Abteilungen – nur root darf hinein"
+	fehler "/srv/backup: $(zeile <<<"$probleme")" "Sicherungen enthalten alle Abteilungen, nur root darf hinein"
 fi
 
 archive=()
@@ -181,7 +181,7 @@ else
 	else
 		hinweis="sudo chown root:root $skript; sudo chmod 755 $skript"
 		((8#$(stat -c '%a' "$wurzel$skript") & 8#022)) &&
-			hinweis="GEFÄHRLICH: andere können das Skript ändern, das als root läuft – $hinweis"
+			hinweis="GEFÄHRLICH: andere können das Skript ändern, das als root läuft: $hinweis"
 		fehler "$skript: $(zeile <<<"$probleme")" "$hinweis"
 	fi
 
@@ -193,13 +193,13 @@ else
 	fi
 
 	grep -q 'tar ' "$wurzel$skript" ||
-		info "Im Skript kommt kein tar-Aufruf vor – sichert es wirklich etwas?"
+		info "Im Skript kommt kein tar-Aufruf vor. Sichert es wirklich etwas?"
 fi
 
 # --- Ergebnis ---------------------------------------------------------------
 echo
 if [[ $bestanden -eq $gesamt ]]; then
-	printf '%s%s🎉 %d von %d Prüfungen bestanden – Tag 3 abgenommen!%s\n' \
+	printf '%s%s%d von %d Prüfungen bestanden, Tag 3 abgenommen.%s\n' \
 		"$fett" "$gruen" "$bestanden" "$gesamt" "$normal"
 else
 	printf '%s%d von %d Prüfungen bestanden.%s\n' "$fett" "$bestanden" "$gesamt" "$normal"

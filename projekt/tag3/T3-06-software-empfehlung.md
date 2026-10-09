@@ -1,11 +1,11 @@
-# T3-06 – Software-Empfehlung für die Geschäftsführung
+# T3-06: Software-Empfehlung für die Geschäftsführung
 
 > **Von:** Grete Frost (Geschäftsführung)
 > **Betreff:** Lizenzkosten
 >
 > Hallo IT,
 >
-> ich habe mir unsere Softwarekosten angeschaut und bin erschrocken. Unser Server läuft mit freier Software und kostet keine Lizenzgebühren – geht das auch für den Rest?
+> ich habe mir unsere Softwarekosten angeschaut und bin erschrocken. Unser Server läuft mit freier Software und kostet keine Lizenzgebühren. Geht das auch für den Rest?
 >
 > Jedes Team schaut sich bitte **einen Bereich** an und stellt mir heute Nachmittag in **fünf Minuten** vor, was wir nehmen sollen. Ich bin keine Technikerin: Mich interessiert, was es kostet, was wir damit **dürfen** und wo die Haken sind.
 >
@@ -23,7 +23,7 @@
 | 6 | Webserver und Datenbank für das neue Kundenportal | noch nichts |
 | 7 | Dateien teilen und gemeinsam bearbeiten | Dropbox, Mail-Anhänge |
 
-## ⭐ Pflicht
+## Pflicht
 
 ### Schritt 1: Recherche
 
@@ -40,7 +40,7 @@ Sucht für euren Bereich **mindestens zwei** freie Programme (bzw. Distributione
 | Läuft auf (Windows, macOS, Linux, Browser) | | | |
 | Haken und Risiken | | | |
 
-Gute Quellen: die Website des Projekts (meist unter „License“ oder „About“), Wikipedia, und – falls das Programm in Debian enthalten ist – `apt show <paket>` auf eurem Server.
+Gute Quellen: die Website des Projekts (meist unter „License“ oder „About“), Wikipedia und, falls das Programm in Debian enthalten ist, `apt show <paket>` auf eurem Server.
 
 ### Schritt 2: Lizenzen auf eurem Server
 
@@ -57,12 +57,12 @@ Jedes Debian-Paket enthält eine Datei mit seinen Lizenzbedingungen: `/usr/share
 
 ### Schritt 3: Der Pitch
 
-Bereitet eine Präsentation von **höchstens fünf Minuten** vor – mit höchstens drei Folien, einem Plakat oder einer Seite im Logbuch. Gliederung:
+Bereitet eine Präsentation von **höchstens fünf Minuten** vor, mit höchstens drei Folien, einem Plakat oder einer Seite im Logbuch. Gliederung:
 
 1. **Unsere Empfehlung** in einem Satz
-2. **Was kostet es?** – einmalig, jährlich, für Support
-3. **Was dürfen wir?** – die Lizenz in Alltagssprache: nutzen, verändern, weitergeben, in eigene Produkte einbauen
-4. **Wo sind die Haken?** – Umstellung, Schulung, Kompatibilität, Support
+2. **Was kostet es?** Einmalig, jährlich, für Support
+3. **Was dürfen wir?** Die Lizenz in Alltagssprache: nutzen, verändern, weitergeben, in eigene Produkte einbauen
+4. **Wo sind die Haken?** Umstellung, Schulung, Kompatibilität, Support
 5. **Unser Fazit für Grete**
 
 Jedes Teammitglied übernimmt einen Teil des Vortrags.
@@ -72,7 +72,7 @@ Jedes Teammitglied übernimmt einen Teil des Vortrags.
 - Die Tabelle aus Schritt 1 ist im Logbuch ausgefüllt.
 - Das Team hält seinen Pitch in höchstens fünf Minuten.
 
-## ⭐⭐ Erweiterung: Lizenzen im Vergleich
+## Erweiterung: Lizenzen im Vergleich
 
 1. Füllt die Tabelle für sieben verbreitete Lizenzen aus:
 
@@ -87,9 +87,9 @@ Jedes Teammitglied übernimmt einen Teil des Vortrags.
    | BSD | | | | |
 
 2. Die Entwicklung der Pinguin GmbH verändert ein GPL-Programm und setzt es nur **intern** ein. Muss sie ihre Änderungen veröffentlichen? Und wenn sie das veränderte Programm an Kunden **verkauft**?
-3. Warum gibt es die AGPL? Denkt an Software, die nicht verteilt, sondern nur über das Internet benutzt wird – wie bei Team 6 und 7.
+3. Warum gibt es die AGPL? Denkt an Software, die nicht verteilt, sondern nur über das Internet benutzt wird, wie bei Team 6 und 7.
 
-## ⭐⭐⭐ Profi: Was ist eigentlich „frei“?
+## Profi: Was ist eigentlich „frei“?
 
 1. Lest die **vier Freiheiten** der Free Software Foundation nach und notiert sie im Logbuch.
 2. Was ist der Unterschied zwischen „Free Software“ (FSF) und „Open Source“ (OSI)? Warum spricht man oft von **FOSS** oder **FLOSS**?
@@ -107,7 +107,7 @@ Jedes Teammitglied übernimmt einen Teil des Vortrags.
 ## Hilfekarten
 
 <details>
-<summary>🟢 Hilfekarte 1 – Wo steht's?</summary>
+<summary>Hilfekarte 1: Wo steht's?</summary>
 
 - **Copyleft:** Wer die Software verändert und **weitergibt**, muss das Ergebnis unter derselben Lizenz weitergeben (GPL, AGPL; schwächer: LGPL, MPL).
 - **Permissiv:** Die Software darf fast beliebig verwendet werden, auch in geschlossener Software. Meist muss nur der Urheber genannt werden (MIT, BSD, Apache).
@@ -119,7 +119,7 @@ Jedes Teammitglied übernimmt einen Teil des Vortrags.
 </details>
 
 <details>
-<summary>🟡 Hilfekarte 2 – Mögliche Kandidaten</summary>
+<summary>Hilfekarte 2: Mögliche Kandidaten</summary>
 
 | Team | Kandidaten |
 |---|---|
@@ -134,11 +134,11 @@ Jedes Teammitglied übernimmt einen Teil des Vortrags.
 </details>
 
 <details>
-<summary>🔴 Hilfekarte 3 – Lösung</summary>
+<summary>Hilfekarte 3: Lösung</summary>
 
-Die Lizenzangaben unten sind der Stand bei der Erstellung dieses Tickets. Prüft sie auf der Website des Projekts – Lizenzen können sich ändern.
+Die Lizenzangaben unten sind der Stand bei der Erstellung dieses Tickets. Prüft sie auf der Website des Projekts, Lizenzen können sich ändern.
 
-**Schritt 1 – Beispiele:**
+**Schritt 1, Beispiele:**
 
 | Bereich | Freie Lösung | Lizenz | Art |
 |---|---|---|---|
@@ -148,7 +148,7 @@ Die Lizenzangaben unten sind der Stand bei der Erstellung dieses Tickets. Prüft
 | Grafik | GIMP, Krita | GPL-3.0-or-later | Copyleft |
 | Passwörter | KeePassXC | GPL-3.0 (bzw. GPL-2.0/3.0) | Copyleft |
 | | Bitwarden-Server | AGPL-3.0 | Copyleft mit Netzwerkklausel |
-| Betriebssystem | Debian | überwiegend GPL, dazu viele andere freie Lizenzen | – |
+| Betriebssystem | Debian | überwiegend GPL, dazu viele andere freie Lizenzen | - |
 | Webserver | Apache HTTP Server | Apache-2.0 | permissiv |
 | | nginx | BSD-2-Clause | permissiv |
 | Datenbank | PostgreSQL | PostgreSQL License | permissiv |
@@ -159,7 +159,7 @@ Typische Haken: Umstellungsaufwand und Schulung, Dateiformate (z. B. komplexe Ma
 
 **Schritt 2:** `bash`, `coreutils` und `tar` stehen unter **GPL-3+** (Copyleft), `sudo` hauptsächlich unter der **ISC**-Lizenz (permissiv, ähnlich MIT). Das `+` bedeutet „Version 3 **oder jede spätere** Version“ (*or later*).
 
-**⭐⭐:**
+**Erweiterung:**
 
 | Lizenz | Copyleft | In geschlossener Software? | Quellcode herausgeben … | Beispiel |
 |---|---|---|---|---|
@@ -171,10 +171,10 @@ Typische Haken: Umstellungsaufwand und Schulung, Dateiformate (z. B. komplexe Ma
 | MIT | nein | ja | nie (Urhebervermerk behalten) | jQuery, Node.js |
 | BSD | nein | ja | nie (Urhebervermerk behalten) | nginx, FreeBSD |
 
-Interne Nutzung ist bei der GPL **keine** Weitergabe – die Änderungen müssen nicht veröffentlicht werden. Wer das veränderte Programm an Kunden verkauft, muss ihnen den Quellcode unter der GPL mitliefern bzw. anbieten. Die AGPL schließt die „SaaS-Lücke“: Wer die Software Nutzern über das Netzwerk anbietet, muss ihnen ebenfalls den Quellcode zur Verfügung stellen.
+Interne Nutzung ist bei der GPL **keine** Weitergabe. Die Änderungen müssen nicht veröffentlicht werden. Wer das veränderte Programm an Kunden verkauft, muss ihnen den Quellcode unter der GPL mitliefern bzw. anbieten. Die AGPL schließt die „SaaS-Lücke“: Wer die Software Nutzern über das Netzwerk anbietet, muss ihnen ebenfalls den Quellcode zur Verfügung stellen.
 
-**⭐⭐⭐:** Die vier Freiheiten: (0) das Programm für jeden Zweck **ausführen**, (1) **verstehen und verändern** (dafür ist der Quellcode nötig), (2) **Kopien weitergeben**, (3) **veränderte Versionen weitergeben**. Die FSF betont die Freiheit der Nutzenden (ethisch), die OSI die praktischen Vorteile des offenen Entwicklungsmodells. Die Lizenzlisten überschneiden sich fast vollständig, daher der Sammelbegriff **FOSS**/**FLOSS** (*Free/Libre and Open Source Software*).
+**Profi:** Die vier Freiheiten: (0) das Programm für jeden Zweck **ausführen**, (1) **verstehen und verändern** (dafür ist der Quellcode nötig), (2) **Kopien weitergeben**, (3) **veränderte Versionen weitergeben**. Die FSF betont die Freiheit der Nutzenden (ethisch), die OSI die praktischen Vorteile des offenen Entwicklungsmodells. Die Lizenzlisten überschneiden sich fast vollständig, daher der Sammelbegriff **FOSS**/**FLOSS** (*Free/Libre and Open Source Software*).
 
-Debian: `main` = frei nach den DFSG und nur von freier Software abhängig, `contrib` = frei, aber abhängig von unfreier Software, `non-free` = unfrei, `non-free-firmware` = unfreie Firmware für Hardware (seit Debian 12 eigener Bereich, bei einer normalen Installation vom Installationsmedium standardmäßig eingebunden – VMs aus Cloud-Images haben oft nur `main`). Creative Commons: `BY` = Namensnennung, `SA` = Weitergabe unter gleichen Bedingungen (*Share Alike*, das Copyleft der CC-Welt), `NC` = keine kommerzielle Nutzung – für eine Firmenwebsite also ungeeignet.
+Debian: `main` = frei nach den DFSG und nur von freier Software abhängig, `contrib` = frei, aber abhängig von unfreier Software, `non-free` = unfrei, `non-free-firmware` = unfreie Firmware für Hardware (seit Debian 12 eigener Bereich, bei einer normalen Installation vom Installationsmedium standardmäßig eingebunden; VMs aus Cloud-Images haben oft nur `main`). Creative Commons: `BY` = Namensnennung, `SA` = Weitergabe unter gleichen Bedingungen (*Share Alike*, das Copyleft der CC-Welt), `NC` = keine kommerzielle Nutzung, für eine Firmenwebsite also ungeeignet.
 
 </details>

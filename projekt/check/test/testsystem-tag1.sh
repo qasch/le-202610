@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# testsystem-tag1.sh – baut ein nachgebautes Wurzelverzeichnis (etc/, home/)
+# testsystem-tag1.sh: baut ein nachgebautes Wurzelverzeichnis (etc/, home/)
 # zum Testen von check-tag1.sh ohne echten Server.
 #
 # Aufruf:

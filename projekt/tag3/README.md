@@ -1,17 +1,17 @@
-# Tag 3 – Systemanalyse, Logauswertung, Datensicherung, erstes Skript
+# Tag 3: Systemanalyse, Logauswertung, Datensicherung, erstes Skript
 
-Heute zeigt sich, was ihr in den ersten beiden Kurswochen gelernt habt: Ihr erstellt einen Steckbrief eures Servers, findet in einer Logdatei einen echten Einbruch, prüft euren eigenen Server auf Schwachstellen und richtet die Datensicherung ein. Am Nachmittag wird aus euren Kommandos euer erstes Skript – und zum Abschluss beratet ihr die Geschäftsführung zu freier Software.
+Heute zeigt sich, was ihr in den ersten beiden Kurswochen gelernt habt: Ihr erstellt einen Steckbrief eures Servers, findet in einer Logdatei einen echten Einbruch, prüft euren eigenen Server auf Schwachstellen und richtet die Datensicherung ein. Am Nachmittag wird aus euren Kommandos euer erstes Skript, und zum Abschluss beratet ihr die Geschäftsführung zu freier Software.
 
-| Ticket | Thema | Stufen |
-|---|---|---|
-| [T3-01](./T3-01-server-steckbrief.md) | Server-Steckbrief | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T3-02](./T3-02-logauswertung.md) | Logauswertung: Was war auf `pinguin-dev` los? | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T3-03](./T3-03-sicherheitsaudit.md) | Sicherheitsaudit des eigenen Servers | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T3-04](./T3-04-datensicherung.md) | Datensicherung | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T3-05](./T3-05-erstes-skript.md) | Das erste Skript | ⭐ ⭐⭐ ⭐⭐⭐ |
-| [T3-06](./T3-06-software-empfehlung.md) | Software-Empfehlung für die Geschäftsführung | ⭐ ⭐⭐ ⭐⭐⭐ |
+| Ticket | Thema |
+|---|---|
+| [T3-01](./T3-01-server-steckbrief.md) | Server-Steckbrief |
+| [T3-02](./T3-02-logauswertung.md) | Logauswertung: Was war auf `pinguin-dev` los? |
+| [T3-03](./T3-03-sicherheitsaudit.md) | Sicherheitsaudit des eigenen Servers |
+| [T3-04](./T3-04-datensicherung.md) | Datensicherung |
+| [T3-05](./T3-05-erstes-skript.md) | Das erste Skript |
+| [T3-06](./T3-06-software-empfehlung.md) | Software-Empfehlung für die Geschäftsführung |
 
-T3-05 baut auf T3-04 auf. Die übrigen Tickets sind unabhängig voneinander. T3-06 endet mit einer kurzen Präsentation am Nachmittag – der Trainer sagt euch, wann.
+T3-05 baut auf T3-04 auf. Die übrigen Tickets sind unabhängig voneinander. T3-06 endet mit einer kurzen Präsentation am Nachmittag. Der Trainer sagt euch, wann.
 
 ## Material
 

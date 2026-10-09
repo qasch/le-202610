@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# aufholen-tag2.sh – stellt auf dem Teamserver den Stand her, den Tag 2
+# aufholen-tag2.sh: stellt auf dem Teamserver den Stand her, den Tag 2
 # voraussetzt: die Pflichtteile von T1-03, T1-04 und T1-05.
 #
 # Aufruf auf dem Teamserver:
@@ -9,7 +9,7 @@
 # Das Skript ergänzt nur, was fehlt, und repariert, was nicht stimmt. Es
 # löscht nichts, was ihr angelegt habt. Jede Aktion wird mit dem Kommando
 # und einer Begründung ausgegeben und in /root/aufholen-tag2.log
-# festgehalten. Ihr könnt es beliebig oft ausführen – beim zweiten Mal gibt
+# festgehalten. Ihr könnt es beliebig oft ausführen. Beim zweiten Mal gibt
 # es nichts mehr zu tun.
 
 startpasswort=Pinguin-Start-2026
@@ -41,11 +41,11 @@ fi
 
 aenderungen=0
 
-# aktion <begründung> <kommando> – zeigt das Kommando, führt es aus und
+# aktion <begründung> <kommando>: zeigt das Kommando, führt es aus und
 # protokolliert es
 aktion() {
 	local grund="$1" kommando="$2"
-	printf '  %s→ %s%s\n' "$fett" "$kommando" "$normal"
+	printf '  %s> %s%s\n' "$fett" "$kommando" "$normal"
 	printf '    # %s\n' "$grund"
 	printf '%s  # %s\n' "$kommando" "$grund" >>"$protokoll"
 	eval "$kommando"
@@ -53,7 +53,7 @@ aktion() {
 }
 
 hinweis() {
-	printf '  %sℹ %s%s\n' "$gelb" "$1" "$normal"
+	printf '  %s[INFO] %s%s\n' "$gelb" "$1" "$normal"
 }
 
 ueberschrift() {
@@ -75,21 +75,21 @@ if [[ $EUID -ne 0 ]]; then
 	exit 1
 fi
 
-printf '%sAufholen für Tag 2 – Pinguin GmbH%s\n' "$fett" "$normal"
+printf '%sAufholen für Tag 2, Pinguin GmbH%s\n' "$fett" "$normal"
 printf '\n# Lauf vom %s\n' "$(date '+%d.%m.%Y %H:%M')" >>"$protokoll"
 
 # --- T1-01: nur Hinweise ------------------------------------------------------
 ueberschrift "T1-01 Server (wird nicht verändert)"
 
 if [[ ! "$(hostname)" =~ ^pinguin-team[0-9]+$ ]]; then
-	hinweis "Der Hostname lautet $(hostname) statt pinguin-team<N> – siehe T1-01 Schritt 2."
+	hinweis "Der Hostname lautet $(hostname) statt pinguin-team<N>, siehe T1-01 Schritt 2."
 fi
 admins=0
 for benutzer in $(getent group sudo | cut -d: -f4 | tr ',' ' '); do
 	[[ $(id -u "$benutzer" 2>/dev/null || echo 0) -ge 1000 ]] && admins=$((admins + 1))
 done
 if [[ $admins -lt 2 ]]; then
-	hinweis "Nur $admins persönliches Konto in der Gruppe sudo – jedes Teammitglied braucht eins (T1-01 Schritt 6)."
+	hinweis "Nur $admins persönliches Konto in der Gruppe sudo. Jedes Teammitglied braucht eins (T1-01 Schritt 6)."
 fi
 
 # --- T1-03: Gruppen -----------------------------------------------------------
@@ -137,7 +137,7 @@ for eintrag in "${mitarbeitende[@]}"; do
 		aktion "Heimatverzeichnisse sind privat (wie bei useradd -m)." "chmod 700 /home/$benutzer"
 	fi
 
-	# Ein Passwort ist gesetzt, wenn ein Hash ($…) vorhanden ist – auch hinter
+	# Ein Passwort ist gesetzt, wenn ein Hash ($…) vorhanden ist, auch hinter
 	# dem "!" eines gesperrten Kontos
 	hash="$(hash_von "$benutzer")"
 	if [[ "${hash#!}" != \$* ]]; then
@@ -161,7 +161,7 @@ in_gruppe mkaya entwicklung ||
 	aktion "Eva Lindner ist in Elternzeit, ihr Konto wird gesperrt." "usermod -L elindner"
 
 if id pinguin-backup &>/dev/null && [[ $(id -u pinguin-backup) -ge 1000 ]]; then
-	aktion "pinguin-backup ist kein Systemkonto (UID $(id -u pinguin-backup)) – neu anlegen, Option -r." \
+	aktion "pinguin-backup ist kein Systemkonto (UID $(id -u pinguin-backup)), neu anlegen, Option -r." \
 		"userdel pinguin-backup"
 fi
 if ! id pinguin-backup &>/dev/null; then
@@ -178,7 +178,7 @@ fi
 # --- Ergebnis -----------------------------------------------------------------
 echo
 if [[ $aenderungen -eq 0 ]]; then
-	printf '%sNichts zu tun – euer Server hat bereits den Stand für Tag 2.%s\n' "$fett" "$normal"
+	printf '%sNichts zu tun, euer Server hat bereits den Stand für Tag 2.%s\n' "$fett" "$normal"
 else
 	printf '%s%d Änderungen vorgenommen.%s Sie stehen auch in %s.\n' "$fett" "$aenderungen" "$normal" "$protokoll"
 	echo "Sucht euch drei Zeilen aus und erklärt sie im Logbuch: Was tut das Kommando, und in welchem Ticket hättet ihr es gebraucht?"
