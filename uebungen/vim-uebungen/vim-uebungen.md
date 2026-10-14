@@ -51,7 +51,8 @@ Leg dir einen eigenen Übungsordner an. Die nano-Übungen verwenden teilweise di
 
 ```bash
 mkdir -p ~/editoren/vim && cd ~/editoren/vim
-wget https://raw.githubusercontent.com/qasch/le-202610/main/vim-uebungsdatei.txt
+wget https://raw.githubusercontent.com/qasch/le-202610/main/uebungen/vim-uebungen/vim-uebungsdatei.txt
+
 cp vim-uebungsdatei.txt uebung.txt
 ```
 
