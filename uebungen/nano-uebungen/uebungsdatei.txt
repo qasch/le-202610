@@ -1,0 +1,129 @@
+==================================================================
+  UEBUNGSDATEI FUER NANO
+  Keine Angst: Diese Datei beisst nicht. Und wenn doch: Strg+X.
+==================================================================
+
+ABSCHNITT 1: WILLKOMMEN
+
+Diese Datei ist dein Spielplatz. Du kannst hier nichts kaputt machen,
+was sich nicht mit einem frischen Download reparieren liesse.
+Die Aufgaben dazu stehen in nano-uebungen.md.
+
+
+ABSCHNITT 2: DIE SCHNITZELJAGD
+
+Codewort 1: TUX
+Das zweite Codewort findest du in Zeile 120.
+(Tipp: Mit Strg+_ oder Alt+G springst du direkt dorthin.)
+
+
+ABSCHNITT 3: MORGENROUTINE (leider durcheinander geraten)
+
+Schritt 4: Kaffee trinken
+Schritt 2: Aufstehen
+Schritt 6: Rechner hochfahren und sudo pacman -Syu
+Schritt 1: Wecker ausschalten
+Schritt 5: Zweiten Kaffee trinken
+Schritt 3: Kaffeemaschine anwerfen
+
+
+ABSCHNITT 4: DOPPELT UND DREIFACH
+
+Diese Zeile ist richtig und soll bleiben.
+Diese Zeile ist doppelt und muss weg.
+Diese Zeile ist doppelt und muss weg.
+Diese Zeile ist doppelt und muss weg.
+Diese Zeile gibt es nur einmal, sie soll aber zweimal da sein.
+
+
+ABSCHNITT 5: SUCHEN UND ERSETZEN
+
+Im Buero laeuft auf jedem Rechner Windows.
+Wenn Windows ein Update macht, holt sich das Team einen Kaffee.
+Windows ist schuld, sagt der Chef, und zwar immer.
+Der Hausmeister putzt am Freitag alle windows im Buero.
+Fun Fact: Auch der Kaffeeautomat laeuft mit Windows.
+
+
+ABSCHNITT 6: KLAMMERN UND EINRUECKUNG
+
+server {
+    listen 80;
+    server_name example.org;
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+    location /bilder/ {
+        autoindex on;
+    }
+}
+
+
+ABSCHNITT 7: UNSICHTBARES
+Diese Zeile hat am Ende drei Leerzeichen.   
+	Diese Zeile beginnt mit einem Tabulator.
+    Diese Zeile beginnt mit vier Leerzeichen.
+Sieht man nicht? Genau das ist das Problem.
+
+
+ABSCHNITT 8: EINE SEHR LANGE ZEILE
+Diese Zeile ist absichtlich viel zu lang, damit du ausprobieren kannst, was nano mit Zeilen macht, die nicht in dein Terminalfenster passen: Standardmaessig verschwindet der Rest einfach rechts aus dem Bild, und am Rand erscheint ein kleines Zeichen, das dir sagt, dass da noch etwas kommt. Mit Soft-Wrap wird die Zeile dagegen nur optisch umgebrochen, in der Datei bleibt sie trotzdem eine einzige Zeile. Wer es nicht glaubt, schaltet die Zeilennummern ein und zaehlt nach.
+
+
+ABSCHNITT 9: TIPPFEHLER-PARADIES
+
+Dises Satz hat mehrere Fhler, die du verbessern sollst.
+Der Pingiun ist das Maskotchen von Linux.
+Nano ist ein Editor fuer das Termnial.
+
+
+ABSCHNITT 10: BEFEHLSLISTE (fuer die Makro-Aufgabe)
+
+ls
+cd
+pwd
+cp
+mv
+rm
+mkdir
+cat
+
+
+ABSCHNITT 11: LINUX-TRIVIA (zum Blaettern und Springen)
+
+Linus Torvalds kuendigte seinen Kernel am 25. August 1991 in einer
+Newsgroup an. Er beschrieb ihn damals als Hobbyprojekt, das nicht
+gross und professionell werden wuerde. Das hat ja super geklappt.
+
+Das Pinguin-Maskottchen Tux wurde 1996 von Larry Ewing gezeichnet.
+Der Legende nach hatte Linus eine Vorliebe fuer Pinguine.
+
+Richard Stallman startete das GNU-Projekt 1983. Viele Werkzeuge, die
+du taeglich auf der Kommandozeile nutzt, stammen aus diesem Projekt.
+
+Nano entstand 1999 als freier Nachbau des Editors Pico. Der Name ist
+ein kleiner Witz: Nano ist tausendmal groesser als Pico.
+
+Im Inneren dieses Abschnitts liegt eine Schatztruhe.
+Codewort 4: BASH
+
+Vim-Nutzer behaupten, nano sei nur etwas fuer Anfaenger.
+Nano-Nutzer haben dafuer schon herausgefunden, wie man den Editor beendet.
+
+
+ABSCHNITT 12: AUFGERAEUMT?
+
+Wenn du hier angekommen bist, hast du die Datei einmal komplett
+durchquert. Respekt.
+
+Codewort 2: PINGUIN
+Das dritte Codewort steht ganz am Ende der Datei. (Tipp: Alt+/)
+
+
+
+
+
+
+
+Codewort 3: KERNEL. Codewort 4 steht unter "Schatztruhe" (Strg+W).

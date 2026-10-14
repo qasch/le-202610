@@ -1,0 +1,164 @@
+==================================================================
+  UEBUNGSDATEI FUER VIM UND NEOVIM
+  Keine Angst: Diese Datei beisst nicht. Und wenn doch: Esc, :q!
+==================================================================
+
+ABSCHNITT 1: WILLKOMMEN
+
+Diese Datei ist dein Spielplatz. Du kannst hier nichts kaputt machen,
+was sich nicht mit einem frischen Download reparieren liesse.
+Die Aufgaben dazu stehen in vim-uebungen.md.
+
+
+ABSCHNITT 2: DIE SCHNITZELJAGD
+
+Codewort 1: TUX
+Das zweite Codewort findest du in Zeile 155.
+(Tipp: Tippe die Zahl und dann ein grosses G.)
+
+
+ABSCHNITT 3: MORGENROUTINE (leider durcheinander geraten)
+
+Schritt 4: Kaffee trinken
+Schritt 2: Aufstehen
+Schritt 6: Rechner hochfahren und sudo pacman -Syu
+Schritt 1: Wecker ausschalten
+Schritt 5: Zweiten Kaffee trinken
+Schritt 3: Kaffeemaschine anwerfen
+
+
+ABSCHNITT 4: DOPPELT UND DREIFACH
+
+Diese Zeile ist richtig und soll bleiben.
+Diese Zeile ist doppelt und muss weg.
+Diese Zeile ist doppelt und muss weg.
+Diese Zeile ist doppelt und muss weg.
+Diese Zeile gibt es nur einmal, sie soll aber zweimal da sein.
+
+
+ABSCHNITT 5: SUCHEN UND ERSETZEN
+
+Im Buero laeuft auf jedem Rechner Windows.
+Wenn Windows ein Update macht, holt sich das Team einen Kaffee.
+Windows ist schuld, sagt der Chef, und zwar immer.
+Der Hausmeister putzt am Freitag alle windows im Buero.
+Fun Fact: Auch der Kaffeeautomat laeuft mit Windows.
+
+
+ABSCHNITT 6: KLAMMERN UND ANFUEHRUNGSZEICHEN
+
+server {
+    listen 80;
+    server_name "example.org";
+    location / {
+        root "/var/www/html";
+        index index.html;
+    }
+    location /bilder/ {
+        autoindex on;
+    }
+}
+
+
+ABSCHNITT 7: UNSICHTBARES
+Diese Zeile hat am Ende drei Leerzeichen.   
+	Diese Zeile beginnt mit einem Tabulator.
+    Diese Zeile beginnt mit vier Leerzeichen.
+Sieht man nicht? Genau das ist das Problem.
+
+
+ABSCHNITT 8: EINE SEHR LANGE ZEILE
+Diese Zeile ist absichtlich viel zu lang, damit du ausprobieren kannst, was Vim mit Zeilen macht, die nicht in dein Terminalfenster passen: Standardmaessig bricht Vim sie optisch um, mit der Option nowrap verschwindet der Rest dagegen rechts aus dem Bild. Egal wie sie angezeigt wird, in der Datei bleibt sie eine einzige Zeile. Wer es nicht glaubt, schaltet die Zeilennummern ein und zaehlt nach.
+
+
+ABSCHNITT 9: TIPPFEHLER-PARADIES
+
+Dises Satz hat mehrere Fhler, die du verbessern sollst.
+Der Pingiun ist das Maskotchen von Linux.
+Vim ist ein Editor fuer das Termnial.
+In diesem Satz steht ein Wort Wort doppelt.
+Vim ist ein ziemlich schwieriger Editor.
+
+
+ABSCHNITT 10: BEFEHLSLISTE (fuer Makro und Blockauswahl)
+
+ls
+cd
+pwd
+cp
+mv
+rm
+mkdir
+cat
+
+
+ABSCHNITT 11: KAPITEL (zum Hochzaehlen)
+
+Kapitel 0: Einleitung
+Kapitel 0: Modi verstehen
+Kapitel 0: Bewegen
+Kapitel 0: Bearbeiten
+Kapitel 0: Suchen und Ersetzen
+Kapitel 0: Konfiguration
+
+
+ABSCHNITT 12: TABELLE (fuer die Blockauswahl)
+
+Name      Distro    Editor
+Anna      Arch      vim
+Ben       Debian    nano
+Clara     Fedora    emacs
+Dennis    Ubuntu    neovim
+Emil      Mint      gedit
+
+
+ABSCHNITT 13: KONFIGURATION (zum Aufraeumen)
+
+# Beispielkonfiguration einer erfundenen Anwendung
+port=8080
+debug=true
+#logfile=/var/log/app.log
+user=www-data
+debug_level=3
+#timeout=30
+#retries=5
+host=localhost
+
+
+ABSCHNITT 14: LINUX-TRIVIA (zum Blaettern und Springen)
+
+Linus Torvalds kuendigte seinen Kernel am 25. August 1991 in einer
+Newsgroup an. Er beschrieb ihn damals als Hobbyprojekt, das nicht
+gross und professionell werden wuerde. Das hat ja super geklappt.
+
+Das Pinguin-Maskottchen Tux wurde 1996 von Larry Ewing gezeichnet.
+Der Legende nach hatte Linus eine Vorliebe fuer Pinguine.
+
+Vim erschien 1991, geschrieben von Bram Moolenaar. Der Name stand
+zuerst fuer "Vi IMitation" und spaeter fuer "Vi IMproved".
+
+Neovim entstand 2014 als Abspaltung von Vim. Ziel war ein moderner,
+besser erweiterbarer Editor, der trotzdem wie Vim bedient wird.
+
+Im Inneren dieses Abschnitts liegt eine Schatztruhe.
+Codewort 4: BASH
+
+Die Frage "Wie beende ich Vim?" wurde auf Stack Overflow ueber eine
+Million Mal aufgerufen. Nach dieser Schulung gehoerst du nicht mehr dazu.
+
+
+ABSCHNITT 15: AUFGERAEUMT?
+
+Wenn du hier angekommen bist, hast du die Datei einmal komplett
+durchquert. Respekt.
+
+Codewort 2: PINGUIN
+Das dritte Codewort steht in der letzten Zeile der Datei. (Tipp: G)
+
+
+
+
+
+
+
+Codewort 3: KERNEL. Das letzte Codewort steht direkt unter dem Wort "Schatztruhe". Such es (/Schatztruhe).
