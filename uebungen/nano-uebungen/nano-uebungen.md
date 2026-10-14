@@ -33,7 +33,7 @@ Leg dir zuerst einen eigenen Übungsordner an. Die vim-Übungen verwenden teilwe
 
 ```bash
 mkdir -p ~/editoren/nano && cd ~/editoren/nano
-wget https://raw.githubusercontent.com/qasch/le-202610/main/uebungsdatei.txt
+wget https://raw.githubusercontent.com/qasch/le-202610/main/uebungen/nano-uebungen/uebungsdatei.txt
 cp uebungsdatei.txt uebung.txt
 ```
 
